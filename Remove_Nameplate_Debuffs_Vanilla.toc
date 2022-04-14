@@ -1,0 +1,12 @@
+## Interface: 11402
+## Version: 1.0.0
+## Title:|cffffffffRemove Nameplate Debuffs|r
+## Author: DonnieDice
+## Notes: Grats!
+
+## X-Category: Buffs & Debuffs
+## X-Website: https://github.com/donniedice/Remove_Nameplate_Debuffs
+## X-Curse-Project-ID: 610801
+## X-WoWI-ID:
+
+main.lua
