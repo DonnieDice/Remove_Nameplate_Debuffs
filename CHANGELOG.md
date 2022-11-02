@@ -1,9 +1,3 @@
-v1.0.1
+v1.0.2
 
-- Added - Download Links in README.md
-
-- Updated - README.md formatting
-
-- Updated - Interface Versions
-
-- Added - Multiple ProjectID
+- Updated - Interface Versions (DragonFlight/WotLK)

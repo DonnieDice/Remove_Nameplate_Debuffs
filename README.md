@@ -1,4 +1,4 @@
-v1.0.1
+v1.0.2
 ------------------------------
 
 **Remove Nameplate Debuffs**
@@ -9,11 +9,11 @@ This is an addon that will remove debuff icons from enemy nameplates.
 
 ------------------------------
 
-- This addon works in SHADOWLANDS!
+- This addon works in DRAGONFLIGHT!
 
 - This addon works in CLASSIC WOW!
 
-- This addon works in CLASSIC TBC!
+- This addon works in CLASSIC WoTLK!
 
 ------------------------------
 <div align="center">
