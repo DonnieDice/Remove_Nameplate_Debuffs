@@ -1,4 +1,6 @@
-v1.0.2
+[![](https://img.shields.io/static/v1?label=Donate&message=CashApp&color=brightgreen)](https://bit.ly/3fyxxSU)
+
+v1.0.3
 ------------------------------
 
 **Remove Nameplate Debuffs**
