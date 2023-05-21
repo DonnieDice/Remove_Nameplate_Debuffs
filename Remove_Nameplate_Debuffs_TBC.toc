@@ -1,8 +1,9 @@
 ## Interface: 20504
-## Version: 1.0.3
+## Version: 1.0.4
 ## Title:|cffffffffRemove Nameplate Debuffs|r
 ## Author: DonnieDice
-## Notes: Grats!
+## Notes: Remove Debuffs from Enemy NamePlate
+## IconTexture: Interface\AddOns\Remove_Nameplate_Debuffs\Images\icon
 
 ## X-Category: Buffs & Debuffs
 ## X-Website: https://github.com/donniedice/Remove_Nameplate_Debuffs
