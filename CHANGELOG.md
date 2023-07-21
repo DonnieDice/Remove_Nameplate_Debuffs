@@ -1,4 +1,3 @@
-v1.0.4
+v1.0.5
 
-- Updated - Interface Versions (DragonFlight/WotLK)
-- Added   - Icon for Interface/AddOns select screen
+- Updated - TOC for Fractures in Time

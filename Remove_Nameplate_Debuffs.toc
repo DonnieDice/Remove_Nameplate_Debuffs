@@ -1,5 +1,5 @@
-## Interface: 100100
-## Version: 1.0.4
+## Interface: 100105
+## Version: 1.0.5
 ## Title:|cffffffffRemove Nameplate Debuffs|r
 ## Author: DonnieDice
 ## Notes: Remove Debuffs from Enemy NamePlate

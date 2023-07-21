@@ -1,4 +1,4 @@
---v1.0.4
+--v1.0.5
 local a = CreateFrame("Frame")
 local events = {}
 
