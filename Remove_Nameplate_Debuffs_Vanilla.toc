@@ -1,5 +1,5 @@
-## Interface: 11403
-## Version: 1.0.3
+## Interface: 11404
+## Version: 1.0.6
 ## Title:|cffffffffRemove Nameplate Debuffs|r
 ## Author: DonnieDice
 ## Notes: Grats!

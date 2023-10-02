@@ -1,3 +1,4 @@
-v1.0.3
+v1.0.6
 
-- Updated - Interface Versions (DragonFlight/WotLK)
+- Updated - TOC for Hardcore (Classic)
+- Updated - TOC for Fury Incarnate(Retail)
