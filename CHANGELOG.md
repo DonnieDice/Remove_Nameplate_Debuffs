@@ -1,4 +1,3 @@
-v1.0.6
+v1.0.7
 
-- Updated - TOC for Hardcore (Classic)
-- Updated - TOC for Fury Incarnate(Retail)
+- Updated - TOC for Fall of the Lich King
