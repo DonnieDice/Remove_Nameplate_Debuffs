@@ -1,3 +1,6 @@
-v1.0.7
+v1.0.8
 
-- Updated - TOC for Fall of the Lich King
+- Updated - README - Removed TUKUI
+- Updated - TOC Formatting
+- Changed - main.lua > Core.lua
+- Added - Notation to Core.lua

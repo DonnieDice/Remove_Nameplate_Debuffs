@@ -1,14 +1,14 @@
 ## Interface: 100107
-## Version: 1.0.7
-## Title:|cffffffffRemove Nameplate Debuffs|r
+## Version: 1.0.8
+## Title:|cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r
+## Notes: Remove Debuff Icons from Enemy Nameplates   |n|r    |cffff7d00By DonnieDice US-BleedingHollow|r
 ## Author: DonnieDice
-## Notes: Grats!
+##IconTexture: Interface\AddOns\Remove_Nameplate_Debuffs\Images\icon
 
 ## X-Category: Buffs & Debuffs
 ## X-Website: https://github.com/donniedice/Remove_Nameplate_Debuffs
 ## X-Curse-Project-ID: 610801
-## X-Tukui-ProjectID: 239
 ## X-Wago-ID: xZKxLEKk
 ## X-WoWI-ID: 26320
 
-main.lua
+Core.lua
