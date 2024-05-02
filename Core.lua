@@ -1,4 +1,4 @@
---v1.0.11
+--v1.0.12
 
 -- This script creates a frame for event handling and defines a function to handle the NAME_PLATE_UNIT_ADDED event.
 -- When this event occurs, the function clears the points of the BuffFrame and sets its alpha to 0.

@@ -1,6 +1,6 @@
 [![](https://img.shields.io/static/v1?label=Donate&message=CashApp&color=brightgreen)](https://bit.ly/3fyxxSU)
 
-v1.0.11
+v1.0.12
 ------------------------------
 
 **RND | Remove Nameplate Debuffs**
@@ -15,7 +15,7 @@ This is an addon that will remove debuff icons from enemy nameplates.
 
 - This addon works in CLASSIC WOW!
 
-- This addon works in CLASSIC WoTLK!
+- This addon works in CLASSIC CATA!
 
 ------------------------------
 <div align="center">
