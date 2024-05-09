@@ -1,0 +1,15 @@
+v2.0.0
+
+- Updated - ToC for _retail_ - Dark Heart (10.2.7.54604) [ToC.100207]
+- Renamed - [CHANGELOG.md] - [CHANGES.md]
+- Added   - [changelog.txt]
+- Added   - Chat Message on Login - [Core.lua]
+- Added   - ## Email - [Remove_Nameplate_Debuffs_Cata.toc]
+- Added   - ## Email - [Remove_Nameplate_Debuffs_Vanilla.toc]
+- Added   - ## Email - [Remove_Nameplate_Debuffs.toc]
+- Added   - ## Version - [Remove_Nameplate_Debuffs_Cata.toc]
+- Added   - ## Version - [Remove_Nameplate_Debuffs_Vanilla.toc]
+- Added   - ## Version - [Remove_Nameplate_Debuffs.toc]
+- Added   - Version -  [Remove_Nameplate_Debuffs_Cata.toc]
+- Added   - Version -  [Remove_Nameplate_Debuffs_Vanilla.toc]
+- Added   - Version -  [Remove_Nameplate_Debuffs.toc]
