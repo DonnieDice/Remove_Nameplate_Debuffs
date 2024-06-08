@@ -1,3 +1,13 @@
+v2.0.1-------------------------------------------------------------------
+- Removed - Version # -  [README.md]
+- Removed - Version # -  [.pkgmeta]
+- Changed - [Core.lua] - [core.lua]
+- Removed - Version # - [core.lua]
+- Removed - Annotation - [core.lua]
+- Updated - [release.yml] - [.github/workflows]
+- Added   - Folder - [/data]
+- Moved   - Core - [/data]
+- Changed - [/Images] - [/images]
 v2.0.0-------------------------------------------------------------------
 - Updated - ToC for _retail_ - Dark Heart (10.2.7.54604) [ToC.100207]
 - Renamed - [CHANGELOG.md] - [CHANGES.md]

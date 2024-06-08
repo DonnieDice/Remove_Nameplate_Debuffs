@@ -1,0 +1,57 @@
+name: Package and Release 
+on:
+  push:
+    tags:
+      - '**'
+
+env:
+  CF_API_KEY: ${{ secrets.CF_API_KEY }}
+  WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+  WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+  GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Project
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git user
+        run: |
+          git config --global user.name "donniedice"
+          git config --global user.email "donniedice@protonmail.com"
+          
+      - name: Extract Version from TOC
+        id: extract_version
+        run: |
+          version=$(grep -oP '^## Version: \K(.*)' ./Remove_Nameplate_Debuffs.toc)
+          echo "::set-output name=version::$version"
+
+      - name: Package and Release
+        uses: BigWigsMods/packager@master
+
+      - name: Read CHANGES.md
+        id: read_changes
+        run: |
+          changes=$(cat CHANGES.md)
+          echo "changes=$changes" >> $GITHUB_ENV
+        shell: bash
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Draft Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          draft: true
+          release_name: ${{ steps.extract_version.outputs.version }}
+          body: ${{ steps.read_changes.outputs.changes }}
