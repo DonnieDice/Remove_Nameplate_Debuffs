@@ -1,0 +1,8 @@
+- Fixed - Improved event handling and safety checks for NAME_PLATE_UNIT_ADDED event
+- Restructured - Event registration and script logic for clarity and maintainability
+- Added - guidelines.md to /docs/
+- Added - /docs/ folder
+- Added - /rnd slash command to toggle addon on/off
+- Moved - CHANGES.md and changelog.txt to /docs/
+- Updated - pkgmeta to reflect new file locations
+- Updated - README.md to match the structure and style of the BLU addon
