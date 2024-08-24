@@ -1,6 +1,6 @@
 ## Interface: 40400
-## Version: 2.0.4
-## Title: - |cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r - |cff8080ff2.0.4|r 
+## Version: 2.1.0
+## Title: - |cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r - |cff8080ff2.1.0|r 
 ## Notes: Remove Debuff Icons from Enemy Nameplates   |n|r    |cffff7d00By Uivi US-BleedingHollow|r
 ## Author: DonnieDice
 ## Email: donniedice@protonmail.com

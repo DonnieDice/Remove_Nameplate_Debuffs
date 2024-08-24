@@ -15,7 +15,7 @@
 ---
 
 ## Compatibility
-- **Dragonflight**
+- **The War Within**
 - **Classic WoW**
 - **Classic Cataclysm**
 
@@ -24,7 +24,7 @@
 ## Installation
 1. Download the addon from [Curse](https://www.curseforge.com/wow/addons/remove-nameplate-debuffs), [GitHub](https://github.com/donniedice/Remove_Nameplate_Debuffs), [Wago](https://addons.wago.io/addons/remove-nameplate-debuffs), or [WoWInterface](https://www.wowinterface.com/downloads/info26320-RemoveNameplateDebuffs.html).
 2. Extract the downloaded file to your World of Warcraft `Interface/AddOns` directory:
-   - For **Dragonflight**: `World of Warcraft/_retail_/Interface/AddOns`
+   - For **The War Within**: `World of Warcraft/_retail_/Interface/AddOns`
    - For **Classic Cataclysm**: `World of Warcraft/_classic_/Interface/AddOns`
    - For **Classic WoW**: `World of Warcraft/_classic_era_/Interface/AddOns`
 3. Restart World of Warcraft and enable the addon in the Addons menu.

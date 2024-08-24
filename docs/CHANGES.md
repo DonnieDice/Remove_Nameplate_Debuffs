@@ -1,8 +1,6 @@
-- Fixed - Improved event handling and safety checks for NAME_PLATE_UNIT_ADDED event
-- Restructured - Event registration and script logic for clarity and maintainability
-- Added - guidelines.md to /docs/
-- Added - /docs/ folder
-- Added - /rnd slash command to toggle addon on/off
-- Moved - CHANGES.md and changelog.txt to /docs/
-- Updated - pkgmeta to reflect new file locations
-- Updated - README.md to match the structure and style of the BLU addon
+- Added - Localization table for customizable strings
+- Added - Persistent toggle for addon on/off using "/rnd" command
+- Added - Help command "/rnd help" to display available commands
+- Added - Color-coded chat messages for addon status changes (enabled/disabled)
+- Added - Prefix variable for consistent message formatting
+- Updated - [README.md] to include The War Within expansion information
