@@ -1,6 +1,1 @@
-- Added - Localization table for customizable strings
-- Added - Persistent toggle for addon on/off using "/rnd" command
-- Added - Help command "/rnd help" to display available commands
-- Added - Color-coded chat messages for addon status changes (enabled/disabled)
-- Added - Prefix variable for consistent message formatting
-- Updated - [README.md] to include The War Within expansion information
+- Updated - ToC for _retail_ - WOW20TH (11.0.5.57171) [ToC.110005]
