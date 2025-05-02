@@ -1,9 +1,9 @@
-## Interface: 11506
-## Version: 2.1.3
-## Title: - |cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r - |cff8080ff2.1.3|r 
+## Interface: 11507
+## Version: 2.1.4
+## Title: - |cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r - |cff8080ff2.1.4|r 
 ## Notes: Remove Debuff Icons from Enemy Nameplates   |n|r    |cffff7d00By DonnieDice|r
 ## Author: DonnieDice
-## Email: joseph@donniedice.com
+## Email: joseph@cranberriestudios.com
 ##IconTexture: Interface\AddOns\Remove_Nameplate_Debuffs\Images\icon
 
 ## X-Category: Buffs & Debuffs
