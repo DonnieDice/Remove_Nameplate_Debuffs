@@ -1,84 +1,274 @@
-local frame = CreateFrame("Frame")
-local events = {}
+--=====================================================================================
+-- RND | Remove Nameplate Debuffs - core.lua
+-- Version: 3.0.0
+-- Author: DonnieDice
+-- Description: Professional World of Warcraft addon that removes debuff icons from nameplates
+-- RGX Mods Collection - RealmGX Community Project
+--=====================================================================================
 
--- Persistent settings using a saved variable
-RNDDB = RNDDB or { showWelcomeMessage = true, addonEnabled = true }
+-- Global addon namespace and version info
+RND = RND or {}
 
--- Localization table
-local L = {
-    ["ADDON_LOADED"] = "Loaded!",
-    ["WELCOME_MESSAGE_ENABLED"] = "|cff00ff00enabled|r",
-    ["WELCOME_MESSAGE_DISABLED"] = "|cffff0000disabled|r",
-    ["ADDON_ENABLED"] = "|cff00ff00enabled|r",
-    ["ADDON_DISABLED"] = "|cffff0000disabled|r",
-    ["AVAILABLE_COMMANDS"] = "Available commands:",
-    ["TOGGLE_WELCOME"] = "/rnd welcome - Toggle the welcome message",
-    ["TOGGLE_ADDON"] = "/rnd - Toggle the addon on/off",
+-- Constants (cached for performance)
+local ADDON_VERSION = "3.0.0"
+local ADDON_NAME = "Remove_Nameplate_Debuffs"
+local ICON_PATH = "|Tinterface/addons/Remove_Nameplate_Debuffs/Images/icon:16:16|t"
+
+-- Set addon properties
+RND.version = ADDON_VERSION
+RND.addonName = ADDON_NAME
+
+-- Default configuration
+RND.defaults = {
+    enabled = true,
+    showWelcome = true,
+    firstRun = true
 }
 
--- Addon prefix
-local PREFIX = "[|cffff7d00RND|r] "
+-- Saved variables will be loaded by WoW after ADDON_LOADED event
+-- Do not initialize here as it will override saved settings
 
--- Handle the NAME_PLATE_UNIT_ADDED event
-function events:NAME_PLATE_UNIT_ADDED(unitId)
-    if not RNDDB.addonEnabled then return end  -- Skip processing if the addon is disabled
+-- Initialize addon settings
+function RND:InitializeSettings()
+    -- Ensure SavedVariables table exists
+    RNDSettings = RNDSettings or {}
+    
+    -- Set defaults for any missing values
+    for key, value in pairs(self.defaults) do
+        if RNDSettings[key] == nil then
+            RNDSettings[key] = value
+        end
+    end
+end
 
+-- Get current settings with fallback to defaults (with type validation)
+function RND:GetSetting(key)
+    if not key or type(key) ~= "string" then
+        return nil
+    end
+    
+    -- Return default if SavedVariables not loaded yet
+    if not RNDSettings then
+        return self.defaults[key]
+    end
+    
+    local value = RNDSettings[key]
+    if value ~= nil then
+        return value
+    end
+    
+    return self.defaults[key]
+end
+
+-- Set a setting value (with validation)
+function RND:SetSetting(key, value)
+    if not key or type(key) ~= "string" or self.defaults[key] == nil then
+        return false
+    end
+    
+    -- Ensure SavedVariables table exists
+    if not RNDSettings then
+        RNDSettings = {}
+    end
+    
+    -- Type validation based on default values
+    local defaultType = type(self.defaults[key])
+    if type(value) ~= defaultType then
+        return false
+    end
+    
+    RNDSettings[key] = value
+    return true
+end
+
+-- Hide debuffs on a specific nameplate
+function RND:HideNameplateDebuffs(unitId)
+    if not self:GetSetting("enabled") then
+        return
+    end
+    
     local nameplate = C_NamePlate.GetNamePlateForUnit(unitId)
     
     -- Ensure nameplate and UnitFrame are valid and not forbidden
-    if not nameplate or nameplate.UnitFrame:IsForbidden() then
+    if not nameplate or not nameplate.UnitFrame then
         return
     end
-
-    local unitFrame = nameplate.UnitFrame
-    unitFrame.BuffFrame:ClearAllPoints()
-    unitFrame.BuffFrame:SetAlpha(0)
-end
-
--- Display a message on player login
-local function DisplayOnLoginMessage()
-    if RNDDB.showWelcomeMessage then
-        print(PREFIX .. L["ADDON_LOADED"])
+    
+    -- Use pcall to handle forbidden nameplates gracefully
+    local success, err = pcall(function()
+        if nameplate.UnitFrame:IsForbidden() then
+            return
+        end
+        
+        local unitFrame = nameplate.UnitFrame
+        if unitFrame.BuffFrame then
+            unitFrame.BuffFrame:ClearAllPoints()
+            unitFrame.BuffFrame:SetAlpha(0)
+        end
+    end)
+    
+    if not success and self.L then
+        -- Silent fail - nameplates can be forbidden in certain situations
     end
 end
 
--- Slash command to toggle the addon on/off and show help
-SLASH_RND1 = "/rnd"
-SlashCmdList["RND"] = function(input)
-    if input == "" then
-        -- Toggle the addon on/off
-        RNDDB.addonEnabled = not RNDDB.addonEnabled
-        local status = RNDDB.addonEnabled and L["ADDON_ENABLED"] or L["ADDON_DISABLED"]
-        print(PREFIX .. "Addon " .. status)
-    elseif input == "welcome" then
-        -- Toggle the welcome message
-        RNDDB.showWelcomeMessage = not RNDDB.showWelcomeMessage
-        local status = RNDDB.showWelcomeMessage and L["WELCOME_MESSAGE_ENABLED"] or L["WELCOME_MESSAGE_DISABLED"]
-        print(PREFIX .. "Welcome message " .. status)
-    elseif input == "help" then
-        -- Display help information
-        print(PREFIX .. L["AVAILABLE_COMMANDS"])
-        print(PREFIX .. L["TOGGLE_ADDON"])
-        print(PREFIX .. L["TOGGLE_WELCOME"])
+-- Test functionality by toggling nameplates
+function RND:TestFunctionality()
+    if not self.L then
+        print(ICON_PATH .. " |cffff0000RND Error:|r Localization not loaded")
+        return
+    end
+    
+    print(ICON_PATH .. " |cffff7d00RND:|r " .. self.L["TEST_TOGGLING"])
+    
+    -- Toggle nameplates off and on to force refresh
+    SetCVar("nameplateShowEnemies", 0)
+    C_Timer.After(0.5, function()
+        SetCVar("nameplateShowEnemies", 1)
+        print(ICON_PATH .. " |cffff7d00RND:|r " .. self.L["TEST_COMPLETE"])
+    end)
+end
+
+-- Display welcome message on player login
+function RND:DisplayWelcomeMessage()
+    if not self:GetSetting("showWelcome") then
+        return
+    end
+    
+    -- Ensure localization exists
+    if not self.L then
+        print(ICON_PATH .. " |cffff0000RND Error:|r Localization not loaded")
+        return
+    end
+    
+    -- Cached strings for performance
+    local title = "[|cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r]"
+    local version = "|cff8080ff(v" .. ADDON_VERSION .. ")|r"
+    local rgxMods = "|cffff7d00RGX Mods|r"
+    local status = self:GetSetting("enabled") and self.L["ENABLED_STATUS"] or self.L["DISABLED_STATUS"]
+    
+    print(ICON_PATH .. " - " .. title .. " " .. status .. " " .. version .. " - " .. rgxMods)
+    
+    -- Show community message on first run
+    if self:GetSetting("firstRun") then
+        print(ICON_PATH .. " " .. self.L["COMMUNITY_MESSAGE"])
+        self:SetSetting("firstRun", false)
+    end
+    
+    print(ICON_PATH .. " " .. self.L["TYPE_HELP"])
+end
+
+-- Slash command handler
+function RND:HandleSlashCommand(args)
+    -- Ensure localization exists
+    if not self.L then
+        print(ICON_PATH .. " |cffff0000RND Error:|r Localization not loaded")
+        return
+    end
+    
+    -- Use cached icon path
+    local iconPrefix = ICON_PATH
+    
+    local command = string.lower(args or "")
+    
+    if command == "" or command == "help" then
+        self:ShowHelp()
+    elseif command == "on" or command == "enable" then
+        self:SetSetting("enabled", true)
+        print(iconPrefix .. " |cffff7d00RND:|r " .. self.L["ADDON_ENABLED"])
+    elseif command == "off" or command == "disable" then
+        self:SetSetting("enabled", false)
+        print(iconPrefix .. " |cffff7d00RND:|r " .. self.L["ADDON_DISABLED"])
+    elseif command == "test" then
+        self:TestFunctionality()
+    elseif command == "status" then
+        self:ShowStatus()
     else
-        print(PREFIX .. L["AVAILABLE_COMMANDS"] .. " /rnd help")
+        print(iconPrefix .. " " .. self.L["ERROR_PREFIX"] .. " " .. self.L["ERROR_UNKNOWN_COMMAND"])
     end
 end
 
--- Event handler function
-frame:SetScript("OnEvent", function(self, event, ...)
+-- Show help information
+function RND:ShowHelp()
+    -- Ensure localization exists
+    if not self.L then
+        print(ICON_PATH .. " |cffff0000RND Error:|r Localization not loaded")
+        return
+    end
+    
+    local iconPrefix = ICON_PATH
+    print(iconPrefix .. " " .. self.L["HELP_HEADER"])
+    print(iconPrefix .. " " .. self.L["HELP_TEST"])
+    print(iconPrefix .. " |cffffffff/rnd on|r - Enable addon")
+    print(iconPrefix .. " |cffffffff/rnd off|r - Disable addon")
+    print(iconPrefix .. " " .. self.L["HELP_STATUS"])
+end
+
+-- Show current status
+function RND:ShowStatus()
+    -- Ensure localization exists
+    if not self.L then
+        print(ICON_PATH .. " |cffff0000RND Error:|r Localization not loaded")
+        return
+    end
+    
+    local iconPrefix = ICON_PATH
+    print(iconPrefix .. " " .. self.L["STATUS_HEADER"])
+    print(iconPrefix .. " " .. self.L["STATUS_STATUS"] .. " " .. 
+        (self:GetSetting("enabled") and self.L["ENABLED_STATUS"] or self.L["DISABLED_STATUS"]))
+    print(iconPrefix .. " " .. string.format(self.L["STATUS_VERSION"], ADDON_VERSION))
+end
+
+-- Track initialization state
+RND.initialized = false
+
+-- Event handler function (optimized with early returns)
+function RND:OnEvent(event, ...)
+    if event == "NAME_PLATE_UNIT_ADDED" then
+        -- Only process if addon is fully initialized and enabled
+        if self.initialized and self:GetSetting("enabled") then
+            local unitId = ...
+            self:HideNameplateDebuffs(unitId)
+        end
+        return
+    end
+    
+    if event == "ADDON_LOADED" then
+        local addonName = ...
+        if addonName == ADDON_NAME then
+            self:InitializeSettings()
+            self.initialized = true
+        end
+        return
+    end
+    
     if event == "PLAYER_LOGIN" then
-        DisplayOnLoginMessage()
-    else
-        events[event](self, ...)
+        -- Ensure we're initialized before showing welcome
+        if not self.initialized then
+            self:InitializeSettings()
+            self.initialized = true
+        end
+        self:DisplayWelcomeMessage()
+    end
+end
+
+-- Register slash commands with error handling
+SLASH_RND1 = "/rnd"
+SlashCmdList["RND"] = function(args)
+    local success, errorMsg = pcall(RND.HandleSlashCommand, RND, args)
+    if not success then
+        print(ICON_PATH .. " |cffff0000RND Error:|r " .. tostring(errorMsg))
+    end
+end
+
+-- Event frame setup with error handling
+local eventFrame = CreateFrame("Frame")
+eventFrame:RegisterEvent("NAME_PLATE_UNIT_ADDED")
+eventFrame:RegisterEvent("ADDON_LOADED")
+eventFrame:RegisterEvent("PLAYER_LOGIN")
+eventFrame:SetScript("OnEvent", function(self, event, ...)
+    local success, errorMsg = pcall(RND.OnEvent, RND, event, ...)
+    if not success then
+        print(ICON_PATH .. " |cffff0000RND Error:|r Event handler failed: " .. tostring(errorMsg))
     end
 end)
-
--- Register relevant events
-frame:RegisterEvent("NAME_PLATE_UNIT_ADDED")
-frame:RegisterEvent("PLAYER_LOGIN")
-
--- Register the event handler
-for event in pairs(events) do
-    frame:RegisterEvent(event)
-end

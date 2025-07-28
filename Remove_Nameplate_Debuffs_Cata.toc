@@ -1,10 +1,11 @@
 ## Interface: 40402
-## Version: 2.1.4
-## Title: - |cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r - |cff8080ff2.1.4|r 
-## Notes: Remove Debuff Icons from Enemy Nameplates   |n|r    |cffff7d00By DonnieDice|r
+## Version: 3.0.0
+## Title: |cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r 
+## Notes: Remove Debuff Icons from Enemy Nameplates|n|r   |cffff7d00By DonnieDice|r
 ## Author: DonnieDice
-## Email: joseph@cranberriestudios.com
-##IconTexture: Interface\AddOns\Remove_Nameplate_Debuffs\Images\icon
+## Email: donniedice@protonmail.com
+## IconTexture: Interface\AddOns\Remove_Nameplate_Debuffs\Images\icon
+## SavedVariables: RNDSettings
 
 ## X-Category: Buffs & Debuffs
 ## X-Website: https://github.com/donniedice/Remove_Nameplate_Debuffs
@@ -12,4 +13,11 @@
 ## X-Wago-ID: xZKxLEKk
 ## X-WoWI-ID: 26320
 
+## X-Embeds: 
+## X-License: MIT
+## X-Localizations: enUS, ruRU, deDE, frFR, esES
+## DefaultState: Enabled
+## LoadOnDemand: 0
+
+data\locales.lua
 data\core.lua
