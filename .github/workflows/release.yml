@@ -48,7 +48,7 @@ jobs:
       - name: Extract Version from TOC
         id: extract_version
         run: |
-          version=$(grep -oP '^## Version: \K(.*)' ./*.toc)
+          version=$(grep "^## Version:" Remove_Nameplate_Debuffs.toc | sed 's/## Version: //')
           echo "::set-output name=version::$version"
 
       - name: Extract Changelog
