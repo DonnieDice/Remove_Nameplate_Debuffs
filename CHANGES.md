@@ -1,0 +1,3 @@
+- Added: Discord webhook notifications with RGX Mods standard format
+- Fixed: GitHub Actions workflow permissions for releases
+- Added: Support for all WoW versions

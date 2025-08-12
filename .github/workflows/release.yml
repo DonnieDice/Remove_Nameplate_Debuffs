@@ -16,6 +16,8 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Clone Project
         uses: actions/checkout@v4
@@ -49,10 +51,87 @@ jobs:
           version=$(grep -oP '^## Version: \K(.*)' ./*.toc)
           echo "::set-output name=version::$version"
 
+      - name: Extract Changelog
+        id: extract_changelog
+        run: |
+          if [ -f "CHANGES.md" ]; then
+            CHANGELOG=$(cat CHANGES.md | head -20 | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+            echo "::set-output name=changelog::$CHANGELOG"
+          else
+            echo "::set-output name=changelog::No changelog available"
+          fi
+
       - name: Package and Release
         uses: BigWigsMods/packager@master
         with:
           release-type: ${{ steps.set_release_type.outputs.release_type }}
+
+      - name: Send Discord Notification
+        if: success()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            echo "Discord webhook not configured, skipping notification"
+            exit 0
+          fi
+          
+          # Determine release type emoji and color
+          RELEASE_TYPE="${{ steps.set_release_type.outputs.release_type }}"
+          if [ "$RELEASE_TYPE" = "alpha" ]; then
+            EMOJI="🔬"
+            TYPE_TEXT="Alpha"
+          elif [ "$RELEASE_TYPE" = "beta" ]; then
+            EMOJI="🧪"
+            TYPE_TEXT="Beta"
+          else
+            EMOJI="🛡️"
+            TYPE_TEXT=""
+          fi
+          
+          # Format the changelog for Discord
+          CHANGELOG="${{ steps.extract_changelog.outputs.changelog }}"
+          
+          # Create RGX Mods standard Discord message
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d "{
+                 \"content\": \"\",
+                 \"username\": \"RND Update\",
+                 \"avatar_url\": \"https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/Images/icon.png\",
+                 \"embeds\": [{
+                   \"title\": \"$EMOJI RND | Remove Nameplate Debuffs - v${{ steps.extract_version.outputs.version }} $TYPE_TEXT\",
+                   \"description\": \"**Clean up your nameplates!** - A new version of Remove Nameplate Debuffs has been released!\\n\\n🎯 **What's New:**\\n$CHANGELOG\\n\\n**Remove debuff icons from enemy nameplates for a cleaner UI experience!**\",
+                   \"url\": \"https://github.com/donniedice/Remove_Nameplate_Debuffs/releases/tag/${{ github.ref_name }}\",
+                   \"color\": 16744448,
+                   \"thumbnail\": {
+                     \"url\": \"https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/Images/icon.png\"
+                   },
+                   \"fields\": [
+                     {
+                       \"name\": \"📥 Downloads\",
+                       \"value\": \"[CurseForge](https://www.curseforge.com/wow/addons/remove-nameplate-debuffs)\\n[WoWInterface](https://www.wowinterface.com/downloads/info26320)\\n[Wago.io](https://addons.wago.io/addons/remove-nameplate-debuffs)\\n[GitHub](https://github.com/donniedice/Remove_Nameplate_Debuffs)\",
+                       \"inline\": true
+                     },
+                     {
+                       \"name\": \"🎮 Compatibility\",
+                       \"value\": \"✅ The War Within\\n✅ Classic Era\\n✅ Cataclysm\\n✅ MoP\",
+                       \"inline\": true
+                     },
+                     {
+                       \"name\": \"💬 Support\",
+                       \"value\": \"[Join Discord](https://discord.gg/hcaxHDNEwa)\\n[Report Issues](https://github.com/donniedice/Remove_Nameplate_Debuffs/issues)\",
+                       \"inline\": true
+                     }
+                   ],
+                   \"footer\": {
+                     \"text\": \"RGX Mods - RealmGX Community\",
+                     \"icon_url\": \"https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/images/kiwi.gif\"
+                   },
+                   \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\"
+                 }]
+               }" \
+               "$DISCORD_WEBHOOK"
 
       - name: Parse Changelog
         if: ${{ steps.set_release_type.outputs.release_type != 'alpha' }}
