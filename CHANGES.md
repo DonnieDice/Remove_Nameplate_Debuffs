@@ -1,3 +1,10 @@
+## v3.1.1
+- Fixed: Discord webhook notifications not sending on releases
+- Fixed: GitHub Actions workflows using deprecated syntax
+- Fixed: Incorrect Discord invite links in release notifications
+- Improved: Error handling and validation for Discord webhooks
+- Updated: All workflows to use modern GitHub Actions syntax
+
 ## v3.1.0
 - Added: RGX Mods brand-compliant README with full formatting
 - Added: Complete distributor descriptions for all platforms

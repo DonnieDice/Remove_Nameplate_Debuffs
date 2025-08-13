@@ -1,6 +1,6 @@
 --=====================================================================================
 -- RND | Remove Nameplate Debuffs - core.lua
--- Version: 3.0.0
+-- Version: 3.1.1
 -- Author: DonnieDice
 -- Description: Professional World of Warcraft addon that removes debuff icons from nameplates
 -- RGX Mods Collection - RealmGX Community Project
@@ -10,7 +10,7 @@
 RND = RND or {}
 
 -- Constants (cached for performance)
-local ADDON_VERSION = "3.1.0"
+local ADDON_VERSION = "3.1.1"
 local ADDON_NAME = "Remove_Nameplate_Debuffs"
 local ICON_PATH = "|Tinterface/addons/Remove_Nameplate_Debuffs/images/icon:16:16|t"
 
