@@ -12,7 +12,7 @@ RND = RND or {}
 -- Constants (cached for performance)
 local ADDON_VERSION = "3.0.0"
 local ADDON_NAME = "Remove_Nameplate_Debuffs"
-local ICON_PATH = "|Tinterface/addons/Remove_Nameplate_Debuffs/Images/icon:16:16|t"
+local ICON_PATH = "|Tinterface/addons/Remove_Nameplate_Debuffs/images/icon:16:16|t"
 
 -- Set addon properties
 RND.version = ADDON_VERSION
