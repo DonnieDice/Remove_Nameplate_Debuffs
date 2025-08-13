@@ -98,14 +98,14 @@ jobs:
                -d "{
                  \"content\": \"\",
                  \"username\": \"RND Update\",
-                 \"avatar_url\": \"https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/Images/icon.png\",
+                 \"avatar_url\": \"https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/Images/rnd_logo.png\",
                  \"embeds\": [{
                    \"title\": \"$EMOJI RND | Remove Nameplate Debuffs - v${{ steps.extract_version.outputs.version }} $TYPE_TEXT\",
                    \"description\": \"**Clean up your nameplates!** - A new version of Remove Nameplate Debuffs has been released!\\n\\n🎯 **What's New:**\\n$CHANGELOG\\n\\n**Remove debuff icons from enemy nameplates for a cleaner UI experience!**\",
                    \"url\": \"https://github.com/donniedice/Remove_Nameplate_Debuffs/releases/tag/${{ github.ref_name }}\",
                    \"color\": 16744448,
                    \"thumbnail\": {
-                     \"url\": \"https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/Images/icon.png\"
+                     \"url\": \"https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/Images/rnd_logo.png\"
                    },
                    \"fields\": [
                      {

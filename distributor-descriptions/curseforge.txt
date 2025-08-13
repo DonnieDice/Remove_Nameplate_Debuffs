@@ -1,0 +1,8 @@
+Clean up your combat experience! RND removes debuff icons from enemy nameplates, giving you a cleaner, more focused UI during intense PvP and raid encounters.
+
+• Instantly removes all nameplate debuffs
+• Lightweight with zero performance impact
+• Whitelist feature coming soon
+• Active development with community feedback
+
+Join our Discord for support: discord.gg/hK9N3esnce

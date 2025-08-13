@@ -1,156 +1,155 @@
-# 🛡️ <span style="color:#A0522D">R</span><span style="color:#A0522D">N</span><span style="color:#A0522D">D</span> | Remove Nameplate Debuffs
-
 <div align="center">
 
-## <img src="https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/images/kiwi.gif" width="25" height="25"> <span style="color:#8B1538">R</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span> <span style="color:#4ecdc4">Mods</span> - [<span style="color:#8B1538">R</span><span style="color:#7598b6">ealm</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span>](https://realmgx.com) Community Project
+# 🎯 RND - Remove Nameplate Debuffs
 
-**Clean Nameplates, Clear Focus!**
+### *Clean Nameplates, Clear Focus!*
 
-[![GitHub Release](https://img.shields.io/github/v/release/donniedice/remove_nameplate_debuffs?style=for-the-badge&color=saddlebrown)](https://github.com/donniedice/remove_nameplate_debuffs/releases)
-[![GitHub Stars](https://img.shields.io/github/stars/donniedice/remove_nameplate_debuffs?style=for-the-badge&color=yellow)](https://github.com/donniedice/remove_nameplate_debuffs)
-[![GitHub Issues](https://img.shields.io/github/issues/donniedice/remove_nameplate_debuffs?style=for-the-badge&color=red)](https://github.com/donniedice/remove_nameplate_debuffs/issues)
+[![Discord](https://img.shields.io/badge/Discord-RealmGX-738bd7.svg?style=for-the-badge&logo=discord)](https://discord.gg/hK9N3esnce)
+[![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg?style=for-the-badge&logo=patreon)](https://www.patreon.com/donniedice)
+[![Paypal](https://img.shields.io/badge/paypal-donate-blue.svg?style=for-the-badge&logo=paypal)](https://www.paypal.com/donniedice)
 
-[![CurseForge](https://img.shields.io/badge/CurseForge-Download-orange?style=for-the-badge&logo=curseforge)](https://www.curseforge.com/wow/addons/remove-nameplate-debuffs)
-[![Wago](https://img.shields.io/badge/Wago.io-Download-blue?style=for-the-badge)](https://addons.wago.io/addons/rnd)
-[![WoWInterface](https://img.shields.io/badge/WoWInterface-Download-green?style=for-the-badge)](https://www.wowinterface.com/downloads/info26320)
+[Features](#features) • [Installation](#installation) • [Configuration](#configuration) • [Support](#support)
 
 </div>
 
----
-
-## 📖 About
-
-<span style="color:#A0522D">**RND**</span> is a lightweight World of Warcraft addon that removes debuff icons from enemy nameplates, providing a cleaner and more focused combat interface. Perfect for PvP, dungeons, and raids where visual clarity is essential.
-
----
-
 ## ✨ Features
 
-| Feature | Description |
-|---------|-------------|
-| 🎯 **Smart Removal** | Automatically hides all debuff icons from enemy nameplates |
-| ⚡ **Zero Configuration** | Works immediately upon installation - no setup required |
-| 🎮 **Universal Compatibility** | Supports all WoW versions from Classic to Retail |
-| 🔧 **Simple Commands** | Easy toggle and status checking via slash commands |
-| 💻 **Lightweight** | Minimal memory footprint and CPU usage |
-| 🛡️ **Addon Friendly** | Compatible with all popular nameplate addons |
-
----
-
-## 🎮 Commands
-
-All commands use the `/rnd` prefix:
-
-| Command | Description |
-|---------|-------------|
-| `/rnd help` | Display all available commands and current status |
-| `/rnd on` | Enable the addon (removes debuffs) |
-| `/rnd off` | Disable the addon (shows debuffs) |
-| `/rnd enable` | Alternative to enable the addon |
-| `/rnd disable` | Alternative to disable the addon |
-| `/rnd test` | Test the addon functionality |
-| `/rnd status` | Check current addon state |
-
----
+🎯 **Clean Nameplates** - Removes all debuff clutter from enemy nameplates  
+⚡ **Lightweight** - Minimal performance impact, maximum visual clarity  
+🛠️ **Whitelist System** (Coming Soon) - Choose which debuffs to display  
+🔧 **Plater Compatible** (In Development) - Full integration with Plater nameplate addon  
+🚀 **Zero Configuration** - Works immediately after installation
 
 ## 📦 Installation
 
-### Automatic Installation (Recommended)
-1. Install via **CurseForge Client**, **WoWUp**, or **Wago Addons**
-2. Search for "**Remove Nameplate Debuffs**" or "**RND**"
-3. Click Install
+### Download Options
+- [CurseForge](https://www.curseforge.com/wow/addons/remove-nameplate-debuffs)
+- [Wago.io](https://addons.wago.io/addons/rnd)
+- [WoWInterface](https://www.wowinterface.com/downloads/info26320)
+- [GitHub Releases](https://github.com/donniedice/remove_nameplate_debuffs/releases)
 
-### Manual Installation
-1. Download the latest release from [GitHub](https://github.com/donniedice/remove_nameplate_debuffs/releases)
-2. Extract the `remove_nameplate_debuffs` folder
-3. Place it in your WoW AddOns directory:
-   - **Retail**: `World of Warcraft/_retail_/Interface/AddOns/`
-   - **Classic**: `World of Warcraft/_classic_/Interface/AddOns/`
-4. Restart World of Warcraft
+### Installation Steps
+1. Download the addon from your preferred platform
+2. Extract to your WoW AddOns directory:
+   - **Retail**: `World of Warcraft/_retail_/Interface/AddOns`
+   - **Classic**: `World of Warcraft/_classic_/Interface/AddOns`
+   - **Classic Era**: `World of Warcraft/_classic_era_/Interface/AddOns`
+3. Restart WoW and enable the addon in the AddOns menu
 
----
+## ⚙️ Configuration
 
-## 💡 Usage
+### Slash Commands
+- `/rnd` or `/rnd help` - Show all available commands
+- `/rnd on` or `/rnd enable` - Enable debuff removal
+- `/rnd off` or `/rnd disable` - Disable debuff removal
+- `/rnd status` - Check current addon state
+- `/rnd test` - Test addon functionality
 
-1. **Install the addon** using any method above
-2. **Log into WoW** - RND activates automatically
-3. **Use commands** to toggle or check status:
-   - Type `/rnd help` to see all options
-   - Type `/rnd off` to temporarily disable
-   - Type `/rnd on` to re-enable
+### Usage Examples
+```
+/rnd on         # Enable debuff removal
+/rnd off        # Temporarily disable
+/rnd status     # Check current state
+/rnd help       # See all commands
+```
 
-> **Note**: RND works with all nameplate addons including ElvUI, Plater, KUI, and default Blizzard nameplates.
+## 🎮 Compatibility
 
----
+### Supported WoW Versions
+| Version | Interface | Status |
+|---------|-----------|--------|
+| **The War Within** | 110105 | ✅ Supported |
+| **Mists of Pandaria Classic** | 50500 | ✅ Supported |
+| **Cataclysm Classic** | 40402 | ✅ Supported |
+| **Wrath of the Lich King Classic** | 30403 | ✅ Supported |
+| **Burning Crusade Classic** | 20504 | ✅ Supported |
+| **Classic Era / Hardcore / SoD** | 11507 | ✅ Supported |
 
-## 🎯 Compatibility
+### Nameplate Addon Compatibility
+- **ElvUI** - Full compatibility
+- **Plater** - See known issues below
+- **KUI Nameplates** - Seamless operation
+- **TidyPlates** - Complete support
+- **Blizzard Default** - Native compatibility
 
-<span style="color:#A0522D">**RND**</span> supports **ALL** World of Warcraft versions:
+## 🐛 Known Issues
 
-| Version | Status | Interface |
-|---------|--------|-----------|
-| **The War Within** (Retail) | ✅ Supported | 110105 |
-| **Classic Era** (Vanilla) | ✅ Supported | 11506 |
-| **Cataclysm Classic** | ✅ Supported | 40402 |
-| **Mists of Pandaria Classic** | ✅ Supported | 50400 |
-| **Wrath of the Lich King Classic** | ✅ Supported | 30403 |
-| **The Burning Crusade Classic** | ✅ Supported | 20504 |
+### Plater Compatibility
+- **Issue**: RND currently doesn't override Plater's debuff settings
+- **Workaround**: Manually blacklist debuffs in Plater's settings
+- **Status**: Full compatibility patch in development
 
----
+*For updates on this issue, join our [Discord](https://discord.gg/hK9N3esnce)*
 
-## 💬 Community & Support
+## 📝 Troubleshooting
 
-### Join Our Discord!
-Connect with the <span style="color:#8B1538">**RGX**</span> <span style="color:#4ecdc4">**Mods**</span> community for:
-- 🐛 Bug reports and feature requests
-- 💡 Addon suggestions and feedback
-- 🤝 Help from experienced players
-- 📢 Update announcements
-- 🎮 General WoW discussion
+### Common Issues & Solutions
 
-[**Join the RealmGX Discord**](https://discord.gg/hK9N3esnce)
+**Debuffs still showing?**
+- Ensure the addon is enabled with `/rnd status`
+- Check if you're using Plater (see workaround above)
+- Try `/reload` to refresh the UI
 
----
+**Addon not working after update?**
+- Delete the `Remove_Nameplate_Debuffs` folder completely
+- Download and install fresh copy
+- Reset settings with `/rnd reset` (if available)
 
-## 🤝 Support Development
+**Performance issues?**
+- RND is extremely lightweight by design
+- Check for conflicts with other nameplate addons
+- Report persistent issues on our [Discord](https://discord.gg/hK9N3esnce)
 
-If you enjoy <span style="color:#A0522D">**RND**</span> and want to support continued development:
+## 💬 Support
 
-- ⭐ **Star** this repository
-- 🐛 **Report** bugs and issues
-- 💡 **Suggest** new features
-- ☕ [**Buy me a coffee**](https://www.buymeacoffee.com/donniedice)
+### Get Help & Connect
 
----
+🎮 **Discord Community**: [discord.gg/hK9N3esnce](https://discord.gg/hK9N3esnce)  
+🐛 **Report Issues**: [GitHub Issues](https://github.com/donniedice/remove_nameplate_debuffs/issues)  
+✨ **Feature Requests**: [Discord Suggestions](https://discord.gg/hK9N3esnce)  
 
-## 📝 License
+### Support Development
 
-This addon is released under the MIT License. See [LICENSE](LICENSE) for details.
+Your support helps keep RND actively maintained and improved!
 
----
+[![Patreon](https://img.shields.io/badge/Support_on-Patreon-FF424D.svg?style=for-the-badge&logo=patreon)](https://www.patreon.com/donniedice)
+[![PayPal](https://img.shields.io/badge/Donate_via-PayPal-00457C.svg?style=for-the-badge&logo=paypal)](https://www.paypal.com/donniedice)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy_Me_A-Coffee-FFDD00.svg?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/donniedice)
 
-## 🏆 Other <span style="color:#8B1538">RGX</span> <span style="color:#4ecdc4">Mods</span> Addons
+## 🚀 Upcoming Features
 
-Explore our complete collection of quality WoW addons:
+- **Whitelist System** - Choose specific debuffs to display
+- **Configuration UI** - In-game settings panel
+- **Full Plater Integration** - Native Plater support
+- **Profile System** - Save and share configurations
+- **Advanced Filtering** - Filter by debuff type/class
 
-| Addon | Description |
-|-------|-------------|
-| [**SQP**](https://www.curseforge.com/wow/addons/sqp-simplequestplates) | Simple Quest Plates - Enhanced quest tracking on nameplates |
-| [**FFLU**](https://www.curseforge.com/wow/addons/fflu) | Final Fantasy Level Up - Victory fanfare on level up |
-| [**BLU**](https://www.curseforge.com/wow/addons/blu) | Boss Level Up - Epic notifications for boss levels |
-| [**SRLU**](https://www.curseforge.com/wow/addons/srlu) | Skyrim Level Up - Iconic Skyrim level up sound |
-| [**CPU**](https://www.curseforge.com/wow/addons/cpu) | Covenant Power Up - Shadowlands covenant sounds |
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](https://github.com/donniedice/remove_nameplate_debuffs/blob/main/CONTRIBUTING.md) for details.
+
+### How to Contribute
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/donniedice/remove_nameplate_debuffs/blob/main/LICENSE) file for details.
 
 ---
 
 <div align="center">
 
-**Thank you for using <span style="color:#A0522D">RND</span>!**
+### Part of the RGX Mods Collection
 
-Clean nameplates, clear focus, better gameplay.
+**Other Popular RGX Mods Addons:**  
+[**SQP**](https://github.com/donniedice/SimpleQuestPlates) • [**FFLU**](https://github.com/donniedice/FFLU) • [**BLU**](https://github.com/donniedice/BLU) • [**SRLU**](https://github.com/donniedice/SRLU) • [**CCU**](https://github.com/donniedice/CoordinationCloakUtility)
 
-<img src="https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/images/kiwi.gif" width="30" height="30">
+**Made with ❤️ by [DonnieDice](https://github.com/donniedice) and the RealmGX Community**
 
-*Made with ❤️ by the <span style="color:#8B1538">RGX</span> <span style="color:#4ecdc4">Mods</span> Team*
+[Discord](https://discord.gg/hK9N3esnce) • [GitHub](https://github.com/donniedice/remove_nameplate_debuffs) • [Support](https://www.patreon.com/donniedice)
 
 </div>

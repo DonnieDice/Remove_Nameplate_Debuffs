@@ -1,0 +1,61 @@
+RND - Remove Nameplate Debuffs - Clean Nameplates, Clear Focus!
+
+The ultimate nameplate cleanup addon for ALL World of Warcraft versions!
+
+[SIZE=4][COLOR=rgb(255, 145, 0)][B]What is RND?[/B][/COLOR][/SIZE]
+RND removes all debuff icons from enemy nameplates, providing a cleaner, more focused combat interface. Perfect for PvP players, raiders, and anyone who wants reduced visual clutter during intense encounters.
+
+[SIZE=4][COLOR=rgb(255, 145, 0)][B]Universal Compatibility[/B][/COLOR][/SIZE]
+RND works seamlessly across EVERY World of Warcraft client:
+• Retail (The War Within)
+• Classic Era / Hardcore / Season of Discovery
+• Cataclysm Classic
+• Wrath of the Lich King Classic
+• Burning Crusade Classic
+• Mists of Pandaria Classic
+
+[SIZE=4][COLOR=rgb(255, 145, 0)][B]Features[/B][/COLOR][/SIZE]
+• [B]Zero Configuration[/B] - Works immediately upon installation
+• [B]Lightweight[/B] - Minimal performance impact
+• [B]Simple Commands[/B] - Easy toggle system
+• [B]Persistent Settings[/B] - Saves your preferences
+• [B]Universal Support[/B] - All WoW versions and nameplate addons
+
+[SIZE=4][COLOR=rgb(255, 145, 0)][B]Commands[/B][/COLOR][/SIZE]
+[CODE]/rnd[/CODE] or [CODE]/rnd help[/CODE] - Show all available commands
+[CODE]/rnd on[/CODE] or [CODE]/rnd enable[/CODE] - Enable debuff removal
+[CODE]/rnd off[/CODE] or [CODE]/rnd disable[/CODE] - Disable debuff removal
+[CODE]/rnd status[/CODE] - Check current addon state
+[CODE]/rnd test[/CODE] - Test addon functionality
+
+[SIZE=4][COLOR=rgb(255, 145, 0)][B]Nameplate Addon Compatibility[/B][/COLOR][/SIZE]
+• ElvUI - Full compatibility
+• Plater - See known issues below
+• KUI Nameplates - Seamless operation
+• TidyPlates - Complete support
+• Blizzard Default - Native compatibility
+
+[SIZE=4][COLOR=rgb(255, 145, 0)][B]Known Issues[/B][/COLOR][/SIZE]
+[COLOR=rgb(255, 0, 0)][B]Plater Compatibility:[/B][/COLOR]
+• Issue: RND currently doesn't override Plater's debuff settings
+• Workaround: Manually blacklist debuffs in Plater's settings
+• Status: Full compatibility patch in development
+
+[SIZE=4][COLOR=rgb(255, 145, 0)][B]Coming Soon[/B][/COLOR][/SIZE]
+• Whitelist System - Choose specific debuffs to display
+• Configuration UI - In-game settings panel
+• Full Plater Integration - Native Plater support
+• Profile System - Save and share configurations
+• Advanced Filtering - Filter by debuff type/class
+
+[SIZE=4][COLOR=rgb(255, 145, 0)][B]Installation[/B][/COLOR][/SIZE]
+1. Download RND
+2. Extract to your Interface/AddOns folder
+3. Launch WoW and enjoy clean nameplates!
+
+[SIZE=4][COLOR=rgb(255, 145, 0)][B]Support[/B][/COLOR][/SIZE]
+[URL="https://github.com/donniedice/remove_nameplate_debuffs/issues"]GitHub Issues[/URL]
+[URL="https://discord.gg/hK9N3esnce"]Discord Community[/URL]
+
+Part of the RGX Mods family of addons
+Made with ❤️ by the RealmGX Community
