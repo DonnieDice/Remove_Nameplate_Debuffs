@@ -35,30 +35,33 @@ jobs:
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
             TAG_NAME=${{ github.ref }}
             if [[ "$TAG_NAME" == *"beta"* ]]; then
-              echo "::set-output name=release_type::beta"
+              echo "release_type=beta" >> $GITHUB_OUTPUT
             elif [[ "$TAG_NAME" == *"alpha"* ]]; then
-              echo "::set-output name=release_type::alpha"
+              echo "release_type=alpha" >> $GITHUB_OUTPUT
             else
-              echo "::set-output name=release_type::release"
+              echo "release_type=release" >> $GITHUB_OUTPUT
             fi
           else
-            echo "::set-output name=release_type::alpha"
+            echo "release_type=alpha" >> $GITHUB_OUTPUT
           fi
 
       - name: Extract Version from TOC
         id: extract_version
         run: |
           version=$(grep "^## Version:" Remove_Nameplate_Debuffs.toc | sed 's/## Version: //')
-          echo "::set-output name=version::$version"
+          echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Extract Changelog
         id: extract_changelog
         run: |
           if [ -f "CHANGES.md" ]; then
-            CHANGELOG=$(cat CHANGES.md | head -20 | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
-            echo "::set-output name=changelog::$CHANGELOG"
+            # Extract first 10 lines and format for Discord
+            CHANGELOG=$(head -10 CHANGES.md | sed 's/^/• /' | sed ':a;N;$!ba;s/\n/\\n/g')
+            echo "changelog<<EOF" >> $GITHUB_OUTPUT
+            echo "$CHANGELOG" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=changelog::No changelog available"
+            echo "changelog=No changelog available" >> $GITHUB_OUTPUT
           fi
 
       - name: Package and Release
@@ -93,7 +96,7 @@ jobs:
           CHANGELOG="${{ steps.extract_changelog.outputs.changelog }}"
           
           # Create RGX Mods standard Discord message
-          curl -H "Content-Type: application/json" \
+          response=$(curl -s -w "\n%{http_code}" -H "Content-Type: application/json" \
                -X POST \
                -d "{
                  \"content\": \"\",
@@ -120,7 +123,7 @@ jobs:
                      },
                      {
                        \"name\": \"💬 Support\",
-                       \"value\": \"[Join Discord](https://discord.gg/hcaxHDNEwa)\\n[Report Issues](https://github.com/donniedice/Remove_Nameplate_Debuffs/issues)\",
+                       \"value\": \"[Join Discord](https://discord.gg/hK9N3esnce)\\n[Report Issues](https://github.com/donniedice/Remove_Nameplate_Debuffs/issues)\",
                        \"inline\": true
                      }
                    ],
@@ -131,7 +134,16 @@ jobs:
                    \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\"
                  }]
                }" \
-               "$DISCORD_WEBHOOK"
+               "$DISCORD_WEBHOOK")
+          
+          http_code=$(echo "$response" | tail -n1)
+          if [ "$http_code" != "204" ]; then
+            echo "Discord notification failed with HTTP code: $http_code"
+            echo "Response: $(echo "$response" | head -n-1)"
+            exit 1
+          else
+            echo "Discord notification sent successfully!"
+          fi
 
       - name: Parse Changelog
         if: ${{ steps.set_release_type.outputs.release_type != 'alpha' }}
