@@ -5,6 +5,10 @@
 - Fixed: Discord webhook to use proper rnd_logo.png instead of missing icon.png
 - Updated: README with clean badge-only header per RGX standards
 - Enhanced: Documentation with proper Plater compatibility warnings
+- Enhanced: Compatibility with other nameplate addons (Plater, TidyPlates, ElvUI, KuiNameplates, etc.)
+- Added: Continuous debuff removal system with 0.5s update cycle
+- Added: Generic detection for any buff/debuff/aura frames
+- Added: UNIT_AURA event handling for dynamic debuff updates
 
 ## v3.0.2
 - Added: Discord webhook notifications with RGX Mods standard format

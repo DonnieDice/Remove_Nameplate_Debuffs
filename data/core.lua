@@ -10,7 +10,7 @@
 RND = RND or {}
 
 -- Constants (cached for performance)
-local ADDON_VERSION = "3.0.0"
+local ADDON_VERSION = "3.1.0"
 local ADDON_NAME = "Remove_Nameplate_Debuffs"
 local ICON_PATH = "|Tinterface/addons/Remove_Nameplate_Debuffs/images/icon:16:16|t"
 
@@ -101,9 +101,67 @@ function RND:HideNameplateDebuffs(unitId)
         end
         
         local unitFrame = nameplate.UnitFrame
+        
+        -- Standard Blizzard BuffFrame
         if unitFrame.BuffFrame then
             unitFrame.BuffFrame:ClearAllPoints()
             unitFrame.BuffFrame:SetAlpha(0)
+            unitFrame.BuffFrame:Hide()
+        end
+        
+        -- Plater compatibility
+        if unitFrame.ExtraIconFrame then
+            unitFrame.ExtraIconFrame:SetAlpha(0)
+            unitFrame.ExtraIconFrame:Hide()
+        end
+        
+        -- TidyPlates/Threat Plates compatibility
+        if unitFrame.AuraWidget then
+            unitFrame.AuraWidget:SetAlpha(0)
+            unitFrame.AuraWidget:Hide()
+        end
+        
+        -- KuiNameplates compatibility
+        if unitFrame.Auras then
+            unitFrame.Auras:SetAlpha(0)
+            unitFrame.Auras:Hide()
+        end
+        
+        -- ElvUI compatibility
+        if unitFrame.Debuffs then
+            unitFrame.Debuffs:SetAlpha(0)
+            unitFrame.Debuffs:Hide()
+        end
+        if unitFrame.Buffs then
+            unitFrame.Buffs:SetAlpha(0)
+            unitFrame.Buffs:Hide()
+        end
+        
+        -- NeatPlates compatibility
+        if unitFrame.AuraIconRegion then
+            unitFrame.AuraIconRegion:SetAlpha(0)
+            unitFrame.AuraIconRegion:Hide()
+        end
+        
+        -- Additional generic frames that might contain debuffs
+        if unitFrame.auras then
+            unitFrame.auras:SetAlpha(0)
+            unitFrame.auras:Hide()
+        end
+        
+        -- Check for any frame with "debuff" or "buff" in the name (case insensitive)
+        for key, frame in pairs(unitFrame) do
+            if type(key) == "string" and type(frame) == "table" then
+                local lowerKey = string.lower(key)
+                if (string.find(lowerKey, "debuff") or string.find(lowerKey, "buff") or string.find(lowerKey, "aura")) then
+                    if frame.SetAlpha then
+                        frame:SetAlpha(0)
+                    end
+                    if frame.Hide then
+                        frame:Hide()
+                    end
+                end
+            end
         end
     end)
     
@@ -233,6 +291,22 @@ function RND:OnEvent(event, ...)
         return
     end
     
+    if event == "NAME_PLATE_UNIT_REMOVED" then
+        -- Could be used for cleanup if needed
+        return
+    end
+    
+    if event == "UNIT_AURA" then
+        -- Handle aura updates to re-hide debuffs when they're added
+        if self.initialized and self:GetSetting("enabled") then
+            local unitId = ...
+            if unitId and string.match(unitId, "nameplate") then
+                self:HideNameplateDebuffs(unitId)
+            end
+        end
+        return
+    end
+    
     if event == "ADDON_LOADED" then
         local addonName = ...
         if addonName == ADDON_NAME then
@@ -264,11 +338,34 @@ end
 -- Event frame setup with error handling
 local eventFrame = CreateFrame("Frame")
 eventFrame:RegisterEvent("NAME_PLATE_UNIT_ADDED")
+eventFrame:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
+eventFrame:RegisterEvent("UNIT_AURA")
 eventFrame:RegisterEvent("ADDON_LOADED")
 eventFrame:RegisterEvent("PLAYER_LOGIN")
 eventFrame:SetScript("OnEvent", function(self, event, ...)
     local success, errorMsg = pcall(RND.OnEvent, RND, event, ...)
     if not success then
         print(ICON_PATH .. " |cffff0000RND Error:|r Event handler failed: " .. tostring(errorMsg))
+    end
+end)
+
+-- Add a periodic update to continuously enforce debuff removal
+-- This handles addons that recreate their frames dynamically
+local updateTimer = 0
+eventFrame:SetScript("OnUpdate", function(self, elapsed)
+    updateTimer = updateTimer + elapsed
+    if updateTimer > 0.5 then -- Check every 0.5 seconds
+        updateTimer = 0
+        if RND.initialized and RND:GetSetting("enabled") then
+            -- Refresh all visible nameplates
+            for _, nameplate in pairs(C_NamePlate.GetNamePlates()) do
+                if nameplate and nameplate.UnitFrame then
+                    local unitId = nameplate.UnitFrame.unit
+                    if unitId then
+                        RND:HideNameplateDebuffs(unitId)
+                    end
+                end
+            end
+        end
     end
 end)
