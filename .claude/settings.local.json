@@ -5,7 +5,9 @@
       "Bash(git commit:*)",
       "Bash(mv:*)",
       "Bash(git add:*)",
-      "Bash(git ls-tree:*)"
+      "Bash(git ls-tree:*)",
+      "Bash(xcopy:*)",
+      "Bash(robocopy:*)"
     ],
     "deny": [],
     "ask": []

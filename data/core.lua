@@ -280,6 +280,63 @@ end
 -- Track initialization state
 RND.initialized = false
 
+-- Hook tooltip to prevent showing debuff tooltips from nameplates
+local function HookTooltips()
+    -- Hook main GameTooltip
+    if GameTooltip then
+        GameTooltip:HookScript("OnTooltipSetUnit", function(self)
+            if RND:GetSetting("enabled") then
+                local unit = select(2, self:GetUnit())
+                if unit and string.match(unit, "nameplate") then
+                    self:Hide()
+                end
+            end
+        end)
+        
+        -- Hook when tooltip is set for spells/buffs/debuffs
+        GameTooltip:HookScript("OnTooltipSetSpell", function(self)
+            if RND:GetSetting("enabled") then
+                local owner = self:GetOwner()
+                if owner and owner:GetParent() then
+                    local parent = owner:GetParent()
+                    -- Check if the parent is a nameplate buff frame
+                    if parent and parent:GetName() and string.match(parent:GetName() or "", "NamePlate") then
+                        self:Hide()
+                    end
+                    -- Also check if it's a unitframe from a nameplate
+                    if parent.unit and string.match(parent.unit, "nameplate") then
+                        self:Hide()
+                    end
+                end
+            end
+        end)
+    end
+    
+    -- Hook NamePlateTooltip if it exists
+    if NamePlateTooltip then
+        NamePlateTooltip:HookScript("OnShow", function(self)
+            if RND:GetSetting("enabled") then
+                self:Hide()
+            end
+        end)
+    end
+    
+    -- Hook BuffTooltip if it exists (some addons use this)
+    if BuffTooltip then
+        BuffTooltip:HookScript("OnShow", function(self)
+            if RND:GetSetting("enabled") then
+                local owner = self:GetOwner()
+                if owner and owner:GetParent() then
+                    local parent = owner:GetParent()
+                    if parent and parent.unit and string.match(parent.unit, "nameplate") then
+                        self:Hide()
+                    end
+                end
+            end
+        end)
+    end
+end
+
 -- Event handler function (optimized with early returns)
 function RND:OnEvent(event, ...)
     if event == "NAME_PLATE_UNIT_ADDED" then
@@ -323,6 +380,7 @@ function RND:OnEvent(event, ...)
             self.initialized = true
         end
         self:DisplayWelcomeMessage()
+        HookTooltips()
     end
 end
 
