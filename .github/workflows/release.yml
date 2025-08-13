@@ -126,7 +126,7 @@ jobs:
                    ],
                    \"footer\": {
                      \"text\": \"RGX Mods - RealmGX Community\",
-                     \"icon_url\": \"https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/images/kiwi.gif\"
+                     \"icon_url\": \"https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/images/rnd_logo.png\"
                    },
                    \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\"
                  }]
