@@ -1,5 +1,7 @@
 <div align="center">
 
+![RND Logo](images/rnd_logo.png)
+
 # 🎯 RND - Remove Nameplate Debuffs
 
 ### *Clean Nameplates, Clear Focus!*
