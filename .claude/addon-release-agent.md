@@ -21,10 +21,13 @@ This agent handles the complete release process for RND (Remove Nameplate Debuff
   - `Remove_Nameplate_Debuffs_Wrath.toc`
 
 ### 3. Changelog Updates
-- [ ] Update `docs/changelog.txt` with new version entry at the top
-  - Format: `vX.X.X-------------------------------------------------------------------`
+- [ ] Update `docs/CHANGES.md` with new version entry at the top
+  - Format: `## vX.X.X - Brief Title`
   - List all changes with proper prefixes: `- Added`, `- Fixed`, `- Updated`, `- Removed`
-- [ ] Update `CHANGES.md` if it exists
+  - Include file references in brackets: `[core.lua]`, `[locales.lua]`, etc.
+- [ ] Update `docs/changelog.txt` with same version entry
+  - Format: `vX.X.X-------------------------------------------------------------------`
+  - Same changes as CHANGES.md but different format
 - [ ] Ensure changelog entries are clear and user-friendly
 
 ### 4. GitHub Workflow Verification
@@ -64,17 +67,19 @@ This agent handles the complete release process for RND (Remove Nameplate Debuff
 ## Important Notes
 
 ### Changelog Format for Discord
-The Discord webhook in the GitHub workflow expects the changelog to be formatted properly. The workflow currently:
-1. Extracts changelog from `CHANGES.md` (first 10 lines)
-2. Formats with bullet points for Discord
+The Discord webhook in the GitHub workflow expects the changelog to be formatted properly. The workflow:
+1. Extracts changelog from `docs/CHANGES.md` (per .pkgmeta specification)
+2. Gets only the current version's changes (not the entire history)
+3. Preserves the "- " bullet format from CHANGES.md
 
-**Recommendation**: Update the workflow to extract from `docs/changelog.txt` and get only the current version's changes:
-
+**How it works**:
 ```bash
-# Extract current version changelog
-version=${{ steps.extract_version.outputs.version }}
-changelog=$(awk "/^v${version}---/{flag=1; next} /^v[0-9]/{flag=0} flag" docs/changelog.txt | head -20)
+# Extract current version changelog only
+VERSION="${{ steps.extract_version.outputs.version }}"
+CHANGELOG_RAW=$(awk "/^## v${VERSION}/{flag=1; next} /^## v[0-9]/{flag=0} flag && /^-/" docs/CHANGES.md | head -20)
 ```
+
+This ensures Discord notifications only show what changed in the specific release.
 
 ### Version Consistency
 All version numbers must match across:

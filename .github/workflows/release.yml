@@ -55,17 +55,22 @@ jobs:
         id: extract_changelog
         run: |
           VERSION="${{ steps.extract_version.outputs.version }}"
-          if [ -f "docs/changelog.txt" ]; then
-            # Extract only the current version's changelog entries
+          if [ -f "docs/CHANGES.md" ]; then
+            # Extract only the current version's changelog entries from CHANGES.md
             # This gets everything between the current version header and the next version header
-            CHANGELOG_RAW=$(awk "/^v${VERSION}---/{flag=1; next} /^v[0-9]/{flag=0} flag && NF" docs/changelog.txt | head -20)
+            # The format is: ## vX.X.X - Title
+            CHANGELOG_RAW=$(awk "/^## v${VERSION}/{flag=1; next} /^## v[0-9]/{flag=0} flag && /^-/" docs/CHANGES.md | head -20)
             
-            # Format for Discord - already has "- " prefix in changelog.txt
+            # Format for Discord - keep the "- " prefix from CHANGES.md
             CHANGELOG=$(echo "$CHANGELOG_RAW" | sed ':a;N;$!ba;s/\n/\\n/g')
             
-            echo "changelog<<EOF" >> $GITHUB_OUTPUT
-            echo "$CHANGELOG" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
+            if [ -z "$CHANGELOG_RAW" ]; then
+              echo "changelog=No changes listed for version ${VERSION}" >> $GITHUB_OUTPUT
+            else
+              echo "changelog<<EOF" >> $GITHUB_OUTPUT
+              echo "$CHANGELOG" >> $GITHUB_OUTPUT
+              echo "EOF" >> $GITHUB_OUTPUT
+            fi
           else
             echo "changelog=No changelog available" >> $GITHUB_OUTPUT
           fi

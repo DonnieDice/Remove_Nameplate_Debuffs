@@ -1,3 +1,11 @@
+## v3.1.2 - GameTooltip Fix & Welcome Message Toggle
+
+- Fixed - GameTooltip hook issue by changing from invalid OnTooltipSetUnit to OnShow handler [core.lua]
+- Added - Ability to toggle welcome message with /rnd welcome on/off commands [core.lua]
+- Added - Localization strings for welcome message toggle in all supported languages [locales.lua]
+- Updated - Help command now shows welcome message toggle options [core.lua]
+- Updated - Status command now displays welcome message setting [core.lua]
+
 ## v3.0.0 - Major Overhaul & RGX Mods Integration
 
 - Added - Complete code rewrite with professional architecture [core.lua]
