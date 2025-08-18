@@ -54,9 +54,15 @@ jobs:
       - name: Extract Changelog
         id: extract_changelog
         run: |
-          if [ -f "CHANGES.md" ]; then
-            # Extract first 10 lines and format for Discord
-            CHANGELOG=$(head -10 CHANGES.md | sed 's/^/• /' | sed ':a;N;$!ba;s/\n/\\n/g')
+          VERSION="${{ steps.extract_version.outputs.version }}"
+          if [ -f "docs/changelog.txt" ]; then
+            # Extract only the current version's changelog entries
+            # This gets everything between the current version header and the next version header
+            CHANGELOG_RAW=$(awk "/^v${VERSION}---/{flag=1; next} /^v[0-9]/{flag=0} flag && NF" docs/changelog.txt | head -20)
+            
+            # Format for Discord - already has "- " prefix in changelog.txt
+            CHANGELOG=$(echo "$CHANGELOG_RAW" | sed ':a;N;$!ba;s/\n/\\n/g')
+            
             echo "changelog<<EOF" >> $GITHUB_OUTPUT
             echo "$CHANGELOG" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
