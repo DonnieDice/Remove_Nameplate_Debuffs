@@ -1,6 +1,6 @@
 --=====================================================================================
 -- RND | Remove Nameplate Debuffs - core.lua
--- Version: 3.1.1
+-- Version: 3.1.2
 -- Author: DonnieDice
 -- Description: Professional World of Warcraft addon that removes debuff icons from nameplates
 -- RGX Mods Collection - RealmGX Community Project
@@ -10,7 +10,7 @@
 RND = RND or {}
 
 -- Constants (cached for performance)
-local ADDON_VERSION = "3.1.1"
+local ADDON_VERSION = "3.1.2"
 local ADDON_NAME = "Remove_Nameplate_Debuffs"
 local ICON_PATH = "|Tinterface/addons/Remove_Nameplate_Debuffs/images/icon:16:16|t"
 
@@ -241,6 +241,12 @@ function RND:HandleSlashCommand(args)
         self:TestFunctionality()
     elseif command == "status" then
         self:ShowStatus()
+    elseif command == "welcome on" then
+        self:SetSetting("showWelcome", true)
+        print(iconPrefix .. " |cffff7d00RND:|r " .. (self.L["WELCOME_ENABLED"] or "Welcome message |cff00ff00enabled|r"))
+    elseif command == "welcome off" then
+        self:SetSetting("showWelcome", false)
+        print(iconPrefix .. " |cffff7d00RND:|r " .. (self.L["WELCOME_DISABLED"] or "Welcome message |cffff0000disabled|r"))
     else
         print(iconPrefix .. " " .. self.L["ERROR_PREFIX"] .. " " .. self.L["ERROR_UNKNOWN_COMMAND"])
     end
@@ -260,6 +266,8 @@ function RND:ShowHelp()
     print(iconPrefix .. " |cffffffff/rnd on|r - Enable addon")
     print(iconPrefix .. " |cffffffff/rnd off|r - Disable addon")
     print(iconPrefix .. " " .. self.L["HELP_STATUS"])
+    print(iconPrefix .. " |cffffffff/rnd welcome on|r - " .. (self.L["HELP_WELCOME_ON"] or "Enable welcome message"))
+    print(iconPrefix .. " |cffffffff/rnd welcome off|r - " .. (self.L["HELP_WELCOME_OFF"] or "Disable welcome message"))
 end
 
 -- Show current status
@@ -274,6 +282,8 @@ function RND:ShowStatus()
     print(iconPrefix .. " " .. self.L["STATUS_HEADER"])
     print(iconPrefix .. " " .. self.L["STATUS_STATUS"] .. " " .. 
         (self:GetSetting("enabled") and self.L["ENABLED_STATUS"] or self.L["DISABLED_STATUS"]))
+    print(iconPrefix .. " " .. (self.L["STATUS_WELCOME"] or "Welcome message:") .. " " ..
+        (self:GetSetting("showWelcome") and self.L["ENABLED_STATUS"] or self.L["DISABLED_STATUS"]))
     print(iconPrefix .. " " .. string.format(self.L["STATUS_VERSION"], ADDON_VERSION))
 end
 
@@ -282,30 +292,33 @@ RND.initialized = false
 
 -- Hook tooltip to prevent showing debuff tooltips from nameplates
 local function HookTooltips()
-    -- Hook main GameTooltip
+    -- Hook main GameTooltip using OnShow to check the unit
     if GameTooltip then
-        GameTooltip:HookScript("OnTooltipSetUnit", function(self)
+        GameTooltip:HookScript("OnShow", function(self)
             if RND:GetSetting("enabled") then
-                local unit = select(2, self:GetUnit())
+                -- Check if tooltip has a unit
+                local _, unit = self:GetUnit()
                 if unit and string.match(unit, "nameplate") then
                     self:Hide()
+                    return
                 end
-            end
-        end)
-        
-        -- Hook when tooltip is set for spells/buffs/debuffs
-        GameTooltip:HookScript("OnTooltipSetSpell", function(self)
-            if RND:GetSetting("enabled") then
+                
+                -- Check if owner is related to a nameplate
                 local owner = self:GetOwner()
                 if owner and owner:GetParent() then
                     local parent = owner:GetParent()
                     -- Check if the parent is a nameplate buff frame
-                    if parent and parent:GetName() and string.match(parent:GetName() or "", "NamePlate") then
-                        self:Hide()
-                    end
-                    -- Also check if it's a unitframe from a nameplate
-                    if parent.unit and string.match(parent.unit, "nameplate") then
-                        self:Hide()
+                    if parent then
+                        local parentName = parent:GetName()
+                        if parentName and string.match(parentName, "NamePlate") then
+                            self:Hide()
+                            return
+                        end
+                        -- Also check if it's a unitframe from a nameplate
+                        if parent.unit and string.match(parent.unit, "nameplate") then
+                            self:Hide()
+                            return
+                        end
                     end
                 end
             end

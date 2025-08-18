@@ -7,7 +7,17 @@
       "Bash(git add:*)",
       "Bash(git ls-tree:*)",
       "Bash(xcopy:*)",
-      "Bash(robocopy:*)"
+      "Bash(robocopy:*)",
+      "Bash(git tag:*)",
+      "Bash(gh release list:*)",
+      "Bash(cat:*)",
+      "Bash(gh secret:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh release:*)",
+      "Bash(gh api:*)",
+      "Bash(gh run view:*)",
+      "Bash(git push:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

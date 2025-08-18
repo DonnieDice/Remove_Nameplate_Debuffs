@@ -1,3 +1,9 @@
+v3.1.2-------------------------------------------------------------------
+- Fixed - GameTooltip hook issue by changing from invalid OnTooltipSetUnit to OnShow handler
+- Added - Ability to toggle welcome message with /rnd welcome on/off commands
+- Added - Localization strings for welcome message toggle in all supported languages (enUS, ruRU, deDE, frFR, esES)
+- Updated - Help command now shows welcome message toggle options
+- Updated - Status command now displays welcome message setting
 v2.1.4-------------------------------------------------------------------
 - Updated - TOC version bump for Retail, Vanilla, and Cata [Remove_Nameplate_Debuffs.toc, Remove_Nameplate_Debuffs_Vanilla.toc, Remove_Nameplate_Debuffs_Cata.toc]
 - Updated - Email address updated in TOC files for Retail, Vanilla, and Cata [Remove_Nameplate_Debuffs.toc, Remove_Nameplate_Debuffs_Vanilla.toc, Remove_Nameplate_Debuffs_Cata.toc]

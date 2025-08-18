@@ -51,7 +51,14 @@ local L = {
     
     -- RGX Mods Branding
     ["RGX_MODS_PREFIX"] = "|cffff7d00RGX Mods|r",
-    ["COMMUNITY_MESSAGE"] = "Part of the RealmGX Community - join us at discord.gg/N7kdKAHVVF"
+    ["COMMUNITY_MESSAGE"] = "Part of the RealmGX Community - join us at discord.gg/N7kdKAHVVF",
+    
+    -- Welcome Message Settings
+    ["WELCOME_ENABLED"] = "Welcome message |cff00ff00enabled|r",
+    ["WELCOME_DISABLED"] = "Welcome message |cffff0000disabled|r",
+    ["HELP_WELCOME_ON"] = "Enable welcome message on login",
+    ["HELP_WELCOME_OFF"] = "Disable welcome message on login",
+    ["STATUS_WELCOME"] = "Welcome message:"
 }
 
 -- Russian localization by ZamestoTV (Hubbotu)
@@ -84,6 +91,12 @@ if locale == "ruRU" then
     L["TEST_COMPLETE"] = "Тест завершен! Дебаффы должны быть скрыты на вражеских индикаторах"
     
     L["COMMUNITY_MESSAGE"] = "Часть сообщества RealmGX - присоединяйтесь к нам на discord.gg/N7kdKAHVVF"
+    
+    L["WELCOME_ENABLED"] = "Приветственное сообщение |cff00ff00включено|r"
+    L["WELCOME_DISABLED"] = "Приветственное сообщение |cffff0000отключено|r"
+    L["HELP_WELCOME_ON"] = "Включить приветственное сообщение при входе"
+    L["HELP_WELCOME_OFF"] = "Отключить приветственное сообщение при входе"
+    L["STATUS_WELCOME"] = "Приветственное сообщение:"
 
 -- German localization
 elseif locale == "deDE" then
@@ -115,6 +128,12 @@ elseif locale == "deDE" then
     L["TEST_COMPLETE"] = "Test abgeschlossen! Debuffs sollten auf feindlichen Namensplaketten verborgen sein"
     
     L["COMMUNITY_MESSAGE"] = "Teil der RealmGX Community - tritt uns bei: discord.gg/N7kdKAHVVF"
+    
+    L["WELCOME_ENABLED"] = "Willkommensnachricht |cff00ff00aktiviert|r"
+    L["WELCOME_DISABLED"] = "Willkommensnachricht |cffff0000deaktiviert|r"
+    L["HELP_WELCOME_ON"] = "Willkommensnachricht beim Login aktivieren"
+    L["HELP_WELCOME_OFF"] = "Willkommensnachricht beim Login deaktivieren"
+    L["STATUS_WELCOME"] = "Willkommensnachricht:"
 
 -- French localization
 elseif locale == "frFR" then
@@ -146,6 +165,12 @@ elseif locale == "frFR" then
     L["TEST_COMPLETE"] = "Test terminé ! Les débuffs devraient être cachés sur les barres de nom ennemies"
     
     L["COMMUNITY_MESSAGE"] = "Partie de la communauté RealmGX - rejoignez-nous sur discord.gg/N7kdKAHVVF"
+    
+    L["WELCOME_ENABLED"] = "Message de bienvenue |cff00ff00activé|r"
+    L["WELCOME_DISABLED"] = "Message de bienvenue |cffff0000désactivé|r"
+    L["HELP_WELCOME_ON"] = "Activer le message de bienvenue à la connexion"
+    L["HELP_WELCOME_OFF"] = "Désactiver le message de bienvenue à la connexion"
+    L["STATUS_WELCOME"] = "Message de bienvenue :"
 
 -- Spanish localization
 elseif locale == "esES" or locale == "esMX" then
@@ -177,6 +202,12 @@ elseif locale == "esES" or locale == "esMX" then
     L["TEST_COMPLETE"] = "¡Prueba completa! Los debuffs deberían estar ocultos en las placas de nombre enemigas"
     
     L["COMMUNITY_MESSAGE"] = "Parte de la comunidad RealmGX - únete a nosotros en discord.gg/N7kdKAHVVF"
+    
+    L["WELCOME_ENABLED"] = "Mensaje de bienvenida |cff00ff00habilitado|r"
+    L["WELCOME_DISABLED"] = "Mensaje de bienvenida |cffff0000deshabilitado|r"
+    L["HELP_WELCOME_ON"] = "Habilitar mensaje de bienvenida al iniciar sesión"
+    L["HELP_WELCOME_OFF"] = "Deshabilitar mensaje de bienvenida al iniciar sesión"
+    L["STATUS_WELCOME"] = "Mensaje de bienvenida:"
 end
 
 -- Assign localization table to global addon namespace
