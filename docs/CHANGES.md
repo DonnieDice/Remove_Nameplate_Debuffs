@@ -1,3 +1,11 @@
+## v3.1.3 - Workflow Improvements & Release Process
+
+- Fixed - GitHub workflow now correctly extracts changelog from docs/CHANGES.md [release.yml]
+- Fixed - Discord notifications now show only current version changes, not entire history [release.yml]
+- Added - Comprehensive addon-release-agent.md documentation for consistent releases [.claude/]
+- Improved - Release process with proper changelog management [release.yml]
+- Updated - Workflow to use modern changelog extraction with version-specific filtering [release.yml]
+
 ## v3.1.2 - GameTooltip Fix & Welcome Message Toggle
 
 - Fixed - GameTooltip hook issue by changing from invalid OnTooltipSetUnit to OnShow handler [core.lua]

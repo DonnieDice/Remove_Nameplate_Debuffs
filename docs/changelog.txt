@@ -1,3 +1,9 @@
+v3.1.3-------------------------------------------------------------------
+- Fixed - GitHub workflow now correctly extracts changelog from docs/CHANGES.md
+- Fixed - Discord notifications now show only current version changes, not entire history
+- Added - Comprehensive addon-release-agent.md documentation for consistent releases
+- Improved - Release process with proper changelog management
+- Updated - Workflow to use modern changelog extraction with version-specific filtering
 v3.1.2-------------------------------------------------------------------
 - Fixed - GameTooltip hook issue by changing from invalid OnTooltipSetUnit to OnShow handler
 - Added - Ability to toggle welcome message with /rnd welcome on/off commands

@@ -17,7 +17,10 @@
       "Bash(gh api:*)",
       "Bash(gh run view:*)",
       "Bash(git push:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(for file in Remove_Nameplate_Debuffs*.toc)",
+      "Bash(do sed -i 's/## Version: 3.1.2/## Version: 3.1.3/' \"$file\")",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []
