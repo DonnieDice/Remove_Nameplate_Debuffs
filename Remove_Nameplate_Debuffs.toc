@@ -1,5 +1,5 @@
 ## Interface: 40402,50503,110207,120000
-## Version: 3.1.4
+## Version: 3.1.5
 ## Title: |cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r
 ## Notes: Remove Debuff Icons from Enemy Nameplates|n|r   |cffff7d00By DonnieDice|r
 ## Author: DonnieDice
