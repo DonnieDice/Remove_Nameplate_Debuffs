@@ -55,18 +55,6 @@
 /rnd help       # See all commands
 ```
 
-## 🎮 Compatibility
-
-### Supported WoW Versions
-| Version | Interface | Status |
-|---------|-----------|--------|
-| **The War Within** | 110105 | ✅ Supported |
-| **Mists of Pandaria Classic** | 50500 | ✅ Supported |
-| **Cataclysm Classic** | 40402 | ✅ Supported |
-| **Wrath of the Lich King Classic** | 30403 | ✅ Supported |
-| **Burning Crusade Classic** | 20504 | ✅ Supported |
-| **Classic Era / Hardcore / SoD** | 11507 | ✅ Supported |
-
 ### Nameplate Addon Compatibility
 - **ElvUI** - Full compatibility
 - **Plater** - See known issues below

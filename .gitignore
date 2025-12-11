@@ -1,17 +1,20 @@
-# Claude local settings
-.claude/
+# IDE files
+.vscode/
+.idea/
 
-# OS generated files
+# OS-generated files
 .DS_Store
 Thumbs.db
 
-# IDE files
-.idea/
-.vscode/
-*.swp
-*.swo
+# WoW-specific backup files
+*.lua.bak
+*.toc.bak
 
-# Temporary files
-*.tmp
-*.bak
-*~
+# Release packaging
+.release/
+packages/
+*.zip
+
+# User-specific files
+.env
+.claude/

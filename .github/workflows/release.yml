@@ -3,9 +3,7 @@ name: Package and Release
 on:
   push:
     tags:
-      - '**'
-    branches:
-      - alpha
+      - 'v*'  # Triggers only on version tags like v1.0.0, v1.0.0-alpha, etc.
 
 env:
   CF_API_KEY: ${{ secrets.CF_API_KEY }}
@@ -28,51 +26,43 @@ jobs:
         run: |
           git config --global user.name "donniedice"
           git config --global user.email "donniedice@protonmail.com"
-          
+
       - name: Set Release Type
         id: set_release_type
         run: |
-          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            TAG_NAME=${{ github.ref }}
-            if [[ "$TAG_NAME" == *"beta"* ]]; then
-              echo "release_type=beta" >> $GITHUB_OUTPUT
-            elif [[ "$TAG_NAME" == *"alpha"* ]]; then
-              echo "release_type=alpha" >> $GITHUB_OUTPUT
-            else
-              echo "release_type=release" >> $GITHUB_OUTPUT
-            fi
-          else
+          TAG_NAME=${{ github.ref }}
+          if [[ "$TAG_NAME" == *"beta"* ]]; then
+            echo "release_type=beta" >> $GITHUB_OUTPUT
+          elif [[ "$TAG_NAME" == *"alpha"* ]]; then
             echo "release_type=alpha" >> $GITHUB_OUTPUT
+          else
+            echo "release_type=release" >> $GITHUB_OUTPUT
           fi
 
       - name: Extract Version from TOC
         id: extract_version
         run: |
-          version=$(grep "^## Version:" Remove_Nameplate_Debuffs.toc | sed 's/## Version: //')
+          # Try to get version from TOC file, fallback to tag name
+          if [ -f "Remove_Nameplate_Debuffs.toc" ]; then
+            version=$(grep -E "^## Version:" Remove_Nameplate_Debuffs.toc | awk '{print $3}')
+            if [ -z "$version" ]; then
+              version="${{ github.ref_name }}"
+            fi
+          else
+            version="${{ github.ref_name }}"
+          fi
+          echo "Extracted version: $version"
           echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Extract Changelog
         id: extract_changelog
         run: |
-          VERSION="${{ steps.extract_version.outputs.version }}"
           if [ -f "docs/CHANGES.md" ]; then
-            # Extract only the current version's changelog entries from CHANGES.md
-            # This gets everything between the current version header and the next version header
-            # The format is: ## vX.X.X - Title
-            CHANGELOG_RAW=$(awk "/^## v${VERSION}/{flag=1; next} /^## v[0-9]/{flag=0} flag && /^-/" docs/CHANGES.md | head -20)
-            
-            # Format for Discord - keep the "- " prefix from CHANGES.md
-            CHANGELOG=$(echo "$CHANGELOG_RAW" | sed ':a;N;$!ba;s/\n/\\n/g')
-            
-            if [ -z "$CHANGELOG_RAW" ]; then
-              echo "changelog=No changes listed for version ${VERSION}" >> $GITHUB_OUTPUT
-            else
-              echo "changelog<<EOF" >> $GITHUB_OUTPUT
-              echo "$CHANGELOG" >> $GITHUB_OUTPUT
-              echo "EOF" >> $GITHUB_OUTPUT
-            fi
+            # Read the changelog and properly escape it for JSON
+            CHANGELOG=$(cat docs/CHANGES.md | head -20 | jq -Rs .)
+            echo "changelog=$CHANGELOG" >> $GITHUB_OUTPUT
           else
-            echo "changelog=No changelog available" >> $GITHUB_OUTPUT
+            echo "changelog=\"No changelog available\"" >> $GITHUB_OUTPUT
           fi
 
       - name: Package and Release
@@ -94,74 +84,129 @@ jobs:
           RELEASE_TYPE="${{ steps.set_release_type.outputs.release_type }}"
           if [ "$RELEASE_TYPE" = "alpha" ]; then
             EMOJI="🔬"
-            TYPE_TEXT="Alpha"
+            TYPE_TEXT=" Alpha"
+            COLOR=16711680
           elif [ "$RELEASE_TYPE" = "beta" ]; then
             EMOJI="🧪"
-            TYPE_TEXT="Beta"
+            TYPE_TEXT=" Beta"
+            COLOR=16744448
           else
             EMOJI="🛡️"
             TYPE_TEXT=""
+            COLOR=16744448
           fi
           
-          # Format the changelog for Discord
-          CHANGELOG="${{ steps.extract_changelog.outputs.changelog }}"
+          # Get version - use tag name as fallback
+          VERSION="${{ steps.extract_version.outputs.version }}"
+          if [ -z "$VERSION" ]; then
+            VERSION="${{ github.ref_name }}"
+          fi
           
-          # Create RGX Mods standard Discord message
-          response=$(curl -s -w "\n%{http_code}" -H "Content-Type: application/json" \
+          # Get the changelog (already JSON-escaped from previous step)
+          CHANGELOG='${{ steps.extract_changelog.outputs.changelog }}'
+          
+          # Build the JSON payload using jq for proper escaping
+          JSON_PAYLOAD=$(jq -n \
+            --arg emoji "$EMOJI" \
+            --arg type_text "$TYPE_TEXT" \
+            --arg version "$VERSION" \
+            --arg tag "${{ github.ref_name }}" \
+            --argjson changelog "$CHANGELOG" \
+            --argjson color "$COLOR" \
+            '{
+              "content": "",
+              "username": "RND Release",
+              "avatar_url": "https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/images/rnd_logo.png",
+              "embeds": [{
+                "title": "\($emoji) RND | Remove Nameplate Debuffs - \($version)\($type_text)",
+                "description": "**Clean up your nameplates!** A new version of RND has been released!\n\n🎯 **What'\''s New:**\n\($changelog)\n\n**Remove debuff icons from enemy nameplates for a cleaner UI experience!**",
+                "url": "https://github.com/donniedice/Remove_Nameplate_Debuffs/releases/tag/\($tag)",
+                "color": $color,
+                "thumbnail": {
+                  "url": "https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/images/rnd_logo.png"
+                },
+                "fields": [
+                  {
+                    "name": "📥 Downloads",
+                    "value": "[CurseForge](https://www.curseforge.com/wow/addons/remove-nameplate-debuffs)\n[WoWInterface](https://www.wowinterface.com/downloads/info26320)\n[Wago.io](https://addons.wago.io/addons/remove-nameplate-debuffs)\n[GitHub](https://github.com/donniedice/Remove_Nameplate_Debuffs)",
+                    "inline": true
+                  },
+                  {
+                    "name": "🎮 Compatibility",
+                    "value": "✅ The War Within\n✅ Classic Era\n✅ Cataclysm\n✅ MoP",
+                    "inline": true
+                  },
+                  {
+                    "name": "💬 Support",
+                    "value": "[Join Discord](https://discord.gg/N7kdKAHVVF)\n[Report Issues](https://github.com/donniedice/Remove_Nameplate_Debuffs/issues)",
+                    "inline": true
+                  }
+                ],
+                "footer": {
+                  "text": "RGX Mods - RealmGX Community",
+                  "icon_url": "https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/images/kiwi.gif"
+                },
+                "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%S.000Z)'"
+              }]
+            }')
+          
+          echo "Sending Discord notification..."
+          echo "Version: $VERSION"
+          
+          # Send to Discord
+          curl -H "Content-Type: application/json" \
                -X POST \
-               -d "{
-                 \"content\": \"\",
-                 \"username\": \"RND Update\",
-                 \"avatar_url\": \"https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/images/rnd_logo.png\",
-                 \"embeds\": [{
-                   \"author\": {
-                     \"name\": \"RND | Remove Nameplate Debuffs - v${{ steps.extract_version.outputs.version }} $TYPE_TEXT\",
-                     \"icon_url\": \"https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/images/rnd_logo.png\",
-                     \"url\": \"https://github.com/donniedice/Remove_Nameplate_Debuffs\"
-                   },
-                   \"title\": \"$EMOJI New Release Available!\",
-                   \"description\": \"**Clean up your nameplates!** - A new version of Remove Nameplate Debuffs has been released!\\n\\n🎯 **What's New:**\\n$CHANGELOG\\n\\n**Remove debuff icons from enemy nameplates for a cleaner UI experience!**\",
-                   \"url\": \"https://github.com/donniedice/Remove_Nameplate_Debuffs/releases/tag/${{ github.ref_name }}\",
-                   \"color\": 16744448,
-                   \"thumbnail\": {
-                     \"url\": \"https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/images/rnd_logo.png\"
-                   },
-                   \"fields\": [
-                     {
-                       \"name\": \"📥 Downloads\",
-                       \"value\": \"[CurseForge](https://www.curseforge.com/wow/addons/remove-nameplate-debuffs)\\n[WoWInterface](https://www.wowinterface.com/downloads/info26320)\\n[Wago.io](https://addons.wago.io/addons/remove-nameplate-debuffs)\\n[GitHub](https://github.com/donniedice/Remove_Nameplate_Debuffs)\",
-                       \"inline\": true
-                     },
-                     {
-                       \"name\": \"🎮 Compatibility\",
-                       \"value\": \"✅ The War Within\\n✅ Classic Era\\n✅ Cataclysm\\n✅ MoP\",
-                       \"inline\": true
-                     },
-                     {
-                       \"name\": \"💬 Support\",
-                       \"value\": \"[Join Discord](https://discord.gg/hK9N3esnce)\\n[Report Issues](https://github.com/donniedice/Remove_Nameplate_Debuffs/issues)\",
-                       \"inline\": true
-                     }
-                   ],
-                   \"footer\": {
-                     \"text\": \"RGX Mods - RealmGX Community\",
-                     \"icon_url\": \"https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/images/rnd_logo.png\"
-                   },
-                   \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\"
-                 }]
-               }" \
-               "$DISCORD_WEBHOOK")
-          
-          http_code=$(echo "$response" | tail -n1)
-          if [ "$http_code" != "204" ]; then
-            echo "Discord notification failed with HTTP code: $http_code"
-            echo "Response: $(echo "$response" | head -n-1)"
-            exit 1
-          else
-            echo "Discord notification sent successfully!"
-          fi
+               -d "$JSON_PAYLOAD" \
+               "$DISCORD_WEBHOOK"
 
-      - name: Parse Changelog
-        if: ${{ steps.set_release_type.outputs.release_type != 'alpha' }}
+      - name: Send Discord Failure Notification
+        if: failure()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: |
-          # Your existing changelog parsing logic
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            echo "Discord webhook not configured, skipping notification"
+            exit 0
+          fi
+          
+          VERSION="${{ steps.extract_version.outputs.version }}"
+          if [ -z "$VERSION" ]; then
+            VERSION="Unknown"
+          fi
+          
+          JSON_PAYLOAD=$(jq -n \
+            --arg version "$VERSION" \
+            --arg run_id "${{ github.run_id }}" \
+            '{
+              "content": "",
+              "username": "RND Build Failed",
+              "avatar_url": "https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/images/rnd_logo.png",
+              "embeds": [{
+                "title": "❌ RND Build Failed",
+                "description": "The release workflow encountered an error",
+                "url": "https://github.com/donniedice/Remove_Nameplate_Debuffs/actions/runs/\($run_id)",
+                "color": 15158332,
+                "fields": [
+                  {
+                    "name": "Version",
+                    "value": $version,
+                    "inline": true
+                  },
+                  {
+                    "name": "Workflow",
+                    "value": "[View Logs](https://github.com/donniedice/Remove_Nameplate_Debuffs/actions/runs/\($run_id))",
+                    "inline": true
+                  }
+                ],
+                "footer": {
+                  "text": "RGX Mods - Build System",
+                  "icon_url": "https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/images/kiwi.gif"
+                },
+                "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%S.000Z)'"
+              }]
+            }')
+          
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d "$JSON_PAYLOAD" \
+               "$DISCORD_WEBHOOK"
