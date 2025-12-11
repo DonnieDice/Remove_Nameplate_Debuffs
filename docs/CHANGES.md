@@ -1,5 +1,1 @@
-- Updated *.toc
-- Removed un-needed toc
-- Updated .pkgmeta
-- Updated .gitignore
-- Updated release.yml
+- Re-added Vanilla toc
