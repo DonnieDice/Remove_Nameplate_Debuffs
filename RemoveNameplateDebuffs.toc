@@ -1,19 +1,19 @@
 ## Interface: 11508,40402,50503,110207,120000,120001
-## Version: v3.1.7
-## Title: |cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r
+## Version: v3.2.0
+## Title: |cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r|cffff7d00!|r
 ## Notes: Remove Debuff Icons from Enemy Nameplates|n|r   |cffff7d00By DonnieDice|r
 ## Author: DonnieDice
 ## Email: donniedice@protonmail.com
-## IconTexture: Interface\AddOns\Remove_Nameplate_Debuffs\Images\icon
+## IconTexture: Interface\AddOns\RemoveNameplateDebuffs\images\icon
 ## SavedVariables: RNDSettings
 
 ## X-Category: Buffs & Debuffs
-## X-Website: https://github.com/donniedice/Remove_Nameplate_Debuffs
+## X-Website: https://github.com/donniedice/RemoveNameplateDebuffs
 ## X-Curse-Project-ID: 610801
 ## X-Wago-ID: xZKxLEKk
 ## X-WoWI-ID: 26320
 
-## X-Embeds: 
+## X-Embeds:
 ## X-License: MIT
 ## X-Localizations: enUS, ruRU, deDE, frFR, esES
 ## DefaultState: Enabled

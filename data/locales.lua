@@ -58,7 +58,14 @@ local L = {
     ["WELCOME_DISABLED"] = "Welcome message |cffff0000disabled|r",
     ["HELP_WELCOME_ON"] = "Enable welcome message on login",
     ["HELP_WELCOME_OFF"] = "Disable welcome message on login",
-    ["STATUS_WELCOME"] = "Welcome message:"
+    ["STATUS_WELCOME"] = "Welcome message:",
+
+    -- Minimap Icon
+    ["MINIMAP_ICON_SHOWN"] = "Minimap icon |cff00ff00shown|r",
+    ["MINIMAP_ICON_HIDDEN"] = "Minimap icon |cffff0000hidden|r. Use |cffffffff/rnd icon on|r to show it again.",
+    ["HELP_ICON_ON"] = "Show the minimap icon",
+    ["HELP_ICON_OFF"] = "Hide the minimap icon",
+    ["STATUS_MINIMAP"] = "Minimap icon:"
 }
 
 -- Russian localization by ZamestoTV (Hubbotu)

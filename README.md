@@ -1,11 +1,11 @@
-# <img src="images/rnd_logo.png" width="25" height="25"> <span style="color:#e74c3c">R</span><span style="color:#e74c3c">N</span><span style="color:#e74c3c">D</span> <span style="color:#3598db">|</span> <span style="color:#e74c3c">R</span><span style="color:#fff">emove </span><span style="color:#e74c3c">N</span><span style="color:#fff">ameplate </span><span style="color:#e74c3c">D</span><span style="color:#fff">ebuffs</span>
-## <img src="https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/images/kiwi.gif" height="20"> <span style="color:#8B1538">R</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span> <span style="color:#4ecdc4">Mods</span> <span style="color:#3598db">-</span> [<span style="color:#8B1538">R</span><span style="color:#7598b6">ealm</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span>](https://realmgx.com) <span style="color:#e74c3c">Community Project</span>
+# <img src="images/rnd_logo.png" width="25" height="25"> <span style="color:#e74c3c">R</span><span style="color:#e74c3c">N</span><span style="color:#e74c3c">D</span> <span style="color:#fff">|</span> <span style="color:#e74c3c">R</span><span style="color:#fff">emove </span><span style="color:#e74c3c">N</span><span style="color:#fff">ameplate </span><span style="color:#e74c3c">D</span><span style="color:#fff">ebuffs</span><span style="color:#e74c3c">!</span>
+## <img src="images/rnd_logo.png" width="20" height="20"> <span style="color:#8B1538">R</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span> <span style="color:#4ecdc4">Mods</span> <span style="color:#3598db">-</span> [<span style="color:#8B1538">R</span><span style="color:#7598b6">ealm</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span>](https://realmgx.com) <span style="color:#e74c3c">Community Project</span>
 
 <div align="center">
 
 <img src="images/rnd_logo.png" alt="RND Logo" width="200">
 
-[![RND](https://img.shields.io/badge/RND-Remove%20Nameplate%20Debuffs-e74c3c?style=for-the-badge&logo=github&logoColor=white)](https://github.com/donniedice/remove_nameplate_debuffs)
+[![RND](https://img.shields.io/badge/RND-Remove%20Nameplate%20Debuffs-e74c3c?style=for-the-badge&logo=github&logoColor=white)](https://github.com/donniedice/RemoveNameplateDebuffs)
 [![RGX Mods](https://img.shields.io/badge/RGX-Mods%20Collection-8B1538?style=for-the-badge&logo=github&logoColor=white)](https://discord.gg/hK9N3esnce)
 
 ### <span style="color:#e74c3c">🌟 Join the </span> <span style="color:#8B1538">R</span><span style="color:#7598b6">ealm</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span> <span style="color:#4ecdc4">Community</span> <span style="color:#3598db">-</span> <span style="color:#8B1538">G</span><span style="color:#7598b6">amers e</span><span style="color:#8B1538">X</span><span style="color:#7598b6">treme!</span> <span style="color:#e74c3c">🌟</span>
@@ -20,15 +20,15 @@
 ---
 
 <!-- GitHub Stats & Badges -->
-[![GitHub release](https://img.shields.io/github/v/release/donniedice/remove_nameplate_debuffs?style=for-the-badge&logo=github&color=success)](https://github.com/donniedice/remove_nameplate_debuffs/releases)
-[![GitHub stars](https://img.shields.io/github/stars/donniedice/remove_nameplate_debuffs?style=for-the-badge&logo=github&color=yellow)](https://github.com/donniedice/remove_nameplate_debuffs/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/donniedice/remove_nameplate_debuffs?style=for-the-badge&logo=github&color=blue)](https://github.com/donniedice/remove_nameplate_debuffs/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/donniedice/remove_nameplate_debuffs?style=for-the-badge&logo=github&color=red)](https://github.com/donniedice/remove_nameplate_debuffs/issues)
-[![GitHub license](https://img.shields.io/github/license/donniedice/remove_nameplate_debuffs?style=for-the-badge&logo=github&color=lightgrey)](https://github.com/donniedice/remove_nameplate_debuffs/blob/main/LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/donniedice/RemoveNameplateDebuffs?style=for-the-badge&logo=github&color=success)](https://github.com/donniedice/RemoveNameplateDebuffs/releases)
+[![GitHub stars](https://img.shields.io/github/stars/donniedice/RemoveNameplateDebuffs?style=for-the-badge&logo=github&color=yellow)](https://github.com/donniedice/RemoveNameplateDebuffs/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/donniedice/RemoveNameplateDebuffs?style=for-the-badge&logo=github&color=blue)](https://github.com/donniedice/RemoveNameplateDebuffs/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/donniedice/RemoveNameplateDebuffs?style=for-the-badge&logo=github&color=red)](https://github.com/donniedice/RemoveNameplateDebuffs/issues)
+[![GitHub license](https://img.shields.io/github/license/donniedice/RemoveNameplateDebuffs?style=for-the-badge&logo=github&color=lightgrey)](https://github.com/donniedice/RemoveNameplateDebuffs/blob/main/LICENSE)
 
-[![GitHub last commit](https://img.shields.io/github/last-commit/donniedice/remove_nameplate_debuffs?style=flat-square&logo=github)](https://github.com/donniedice/remove_nameplate_debuffs/commits/main)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/donniedice/remove_nameplate_debuffs?style=flat-square&logo=github)](https://github.com/donniedice/remove_nameplate_debuffs/graphs/contributors)
-[![GitHub repo size](https://img.shields.io/github/repo-size/donniedice/remove_nameplate_debuffs?style=flat-square&logo=github)](https://github.com/donniedice/remove_nameplate_debuffs)
+[![GitHub last commit](https://img.shields.io/github/last-commit/donniedice/RemoveNameplateDebuffs?style=flat-square&logo=github)](https://github.com/donniedice/RemoveNameplateDebuffs/commits/main)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/donniedice/RemoveNameplateDebuffs?style=flat-square&logo=github)](https://github.com/donniedice/RemoveNameplateDebuffs/graphs/contributors)
+[![GitHub repo size](https://img.shields.io/github/repo-size/donniedice/RemoveNameplateDebuffs?style=flat-square&logo=github)](https://github.com/donniedice/RemoveNameplateDebuffs)
 
 <!-- Platform Badges -->
 [![CurseForge](https://img.shields.io/badge/CurseForge-Downloads-orange?style=flat-square&logo=curseforge)](https://www.curseforge.com/wow/addons/remove-nameplate-debuffs)
@@ -84,7 +84,7 @@
 | | |
 |---|---|
 | [![Donate](https://img.shields.io/badge/Donate-CashApp-00C853?style=for-the-badge&logo=cash-app&logoColor=white)](https://bit.ly/3fyxxSU) | [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/donniedice) |
-| [![GitHub Sponsor](https://img.shields.io/badge/Sponsor-GitHub-ff69b4?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/donniedice) | [![Star](https://img.shields.io/badge/⭐-Star%20this%20repository-yellow?style=for-the-badge&logo=github)](https://github.com/donniedice/remove_nameplate_debuffs) |
+| [![GitHub Sponsor](https://img.shields.io/badge/Sponsor-GitHub-ff69b4?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/donniedice) | [![Star](https://img.shields.io/badge/⭐-Star%20this%20repository-yellow?style=for-the-badge&logo=github)](https://github.com/donniedice/RemoveNameplateDebuffs) |
 
 _<span style="color:#e67e23">Every donation helps fund new features and improvements!</span>_
 
@@ -94,7 +94,7 @@ _<span style="color:#e67e23">Every donation helps fund new features and improvem
 
 ## <span style="color:#e74c3c">🎯 What is RND?</span>
 
-**<span style="color:#e74c3c">R</span><span style="color:#e74c3c">N</span><span style="color:#e74c3c">D</span> <span style="color:#3598db">|</span> <span style="color:#e74c3c">R</span><span style="color:#fff">emove </span><span style="color:#e74c3c">N</span><span style="color:#fff">ameplate </span><span style="color:#e74c3c">D</span><span style="color:#fff">ebuffs</span>** <span style="color:#e67e23">removes all debuff icon clutter from enemy nameplates in</span> <span style="color:#06c">World of Warcraft</span><span style="color:#e67e23">, giving you a clean and focused view of your targets. Zero configuration required — it works immediately after installation.</span>
+**<span style="color:#e74c3c">R</span><span style="color:#e74c3c">N</span><span style="color:#e74c3c">D</span> <span style="color:#fff">|</span> <span style="color:#e74c3c">R</span><span style="color:#fff">emove </span><span style="color:#e74c3c">N</span><span style="color:#fff">ameplate </span><span style="color:#e74c3c">D</span><span style="color:#fff">ebuffs</span><span style="color:#e74c3c">!</span>** <span style="color:#e67e23">removes all debuff icon clutter from enemy nameplates in</span> <span style="color:#06c">World of Warcraft</span><span style="color:#e67e23">, giving you a clean and focused view of your targets. Zero configuration required — it works immediately after installation.</span>
 
 ### <span style="color:#e74c3c">🔥 Why Choose RND?</span>
 - **<span style="color:#2dc26b">🎯 Clean Nameplates:</span>** <span style="color:#e67e23">Remove all debuff clutter from enemy nameplates instantly</span>
@@ -162,6 +162,8 @@ _<span style="color:#e67e23">Every donation helps fund new features and improvem
 | `/rnd off` or `/rnd disable` | Disable debuff removal |
 | `/rnd status` | Check current addon state |
 | `/rnd test` | Test addon functionality |
+| `/rnd icon on` | Show the minimap icon |
+| `/rnd icon off` | Hide the minimap icon |
 
 </div>
 
@@ -173,10 +175,10 @@ _<span style="color:#e67e23">Every donation helps fund new features and improvem
 
 | WoW Version | Interface | Status | TOC File |
 |-------------|-----------|--------|----------|
-| **The War Within (Retail)** | `110105` | ✅ Fully Supported | `Remove_Nameplate_Debuffs.toc` |
-| **Mists of Pandaria Classic** | `50500` | ✅ Fully Supported | `Remove_Nameplate_Debuffs_Mists.toc` |
-| **Cataclysm Classic** | `40402` | ✅ Fully Supported | `Remove_Nameplate_Debuffs_Cata.toc` |
-| **Classic Era** | `11507` | ✅ Fully Supported | `Remove_Nameplate_Debuffs_Vanilla.toc` |
+| **The War Within (Retail)** | `110105` | ✅ Fully Supported | `RemoveNameplateDebuffs.toc` |
+| **Mists of Pandaria Classic** | `50500` | ✅ Fully Supported | `RemoveNameplateDebuffs_Mists.toc` |
+| **Cataclysm Classic** | `40402` | ✅ Fully Supported | `RemoveNameplateDebuffs_Cata.toc` |
+| **Classic Era** | `11507` | ✅ Fully Supported | `RemoveNameplateDebuffs_Vanilla.toc` |
 
 </div>
 
@@ -188,7 +190,7 @@ _<span style="color:#e67e23">Every donation helps fund new features and improvem
    - [<span style="color:#ff6b6b">CurseForge</span>](https://www.curseforge.com/wow/addons/remove-nameplate-debuffs)
    - [<span style="color:#b96ad9">Wago.io</span>](https://addons.wago.io/addons/rnd)
    - [<span style="color:#4ecdc4">WoWInterface</span>](https://www.wowinterface.com/downloads/info26320)
-   - [<span style="color:#24292e">GitHub</span>](https://github.com/donniedice/remove_nameplate_debuffs/releases)
+   - [<span style="color:#24292e">GitHub</span>](https://github.com/donniedice/RemoveNameplateDebuffs/releases)
 
 2. **<span style="color:#4ecdc4">Extract</span>** <span style="color:#e67e23">to your</span> <span style="color:#06c">WoW</span> <span style="color:#e67e23">AddOns directory</span><span style="color:#3598db">:</span>
    - <span style="color:#e67e23">**Retail**: `World of Warcraft/_retail_/Interface/AddOns`</span>
@@ -201,7 +203,7 @@ _<span style="color:#e67e23">Every donation helps fund new features and improvem
 
 ## <span style="color:#e74c3c">🆕 What's New</span>
 
-_<span style="color:#e67e23">See</span> [<span style="color:#e74c3c">GitHub Releases</span>](https://github.com/donniedice/remove_nameplate_debuffs/releases) <span style="color:#e67e23">for the full release history and latest updates.</span>_
+_<span style="color:#e67e23">See</span> [<span style="color:#e74c3c">GitHub Releases</span>](https://github.com/donniedice/RemoveNameplateDebuffs/releases) <span style="color:#e67e23">for the full release history and latest updates.</span>_
 
 ---
 
@@ -252,12 +254,12 @@ _<span style="color:#e67e23">For updates on this issue, join our</span> [<span s
 - <span style="color:#e67e23">Try</span> `/reload` <span style="color:#e67e23">to refresh the UI</span>
 
 **<span style="color:#ff6b6b">Addon not working after update?</span>**
-- <span style="color:#e67e23">Delete the</span> `Remove_Nameplate_Debuffs` <span style="color:#e67e23">folder completely and download a fresh copy</span>
+- <span style="color:#e67e23">Delete the</span> `RemoveNameplateDebuffs` <span style="color:#e67e23">folder completely and download a fresh copy</span>
 - <span style="color:#e67e23">Reset settings with</span> `/rnd status` <span style="color:#e67e23">to verify current state</span>
 
 **<span style="color:#ff6b6b">Still having trouble?</span>**
 - <span style="color:#e67e23">Join our</span> [<span style="color:#7289da">Discord</span>](https://discord.gg/hK9N3esnce) <span style="color:#e67e23">for instant support</span>
-- <span style="color:#e67e23">Open a</span> [<span style="color:#ff6b6b">GitHub Issue</span>](https://github.com/donniedice/remove_nameplate_debuffs/issues)
+- <span style="color:#e67e23">Open a</span> [<span style="color:#ff6b6b">GitHub Issue</span>](https://github.com/donniedice/RemoveNameplateDebuffs/issues)
 
 ---
 
@@ -274,7 +276,7 @@ _<span style="color:#e67e23">For updates on this issue, join our</span> [<span s
 ## <span style="color:#e74c3c">🤝 Contributing</span>
 
 <span style="color:#e67e23">Contributions are welcome! Feel free to</span><span style="color:#3598db">:</span>
-- <span style="color:#2dc26b">🐛 **Report bugs**</span> <span style="color:#e67e23">via</span> [<span style="color:#b96ad9">GitHub Issues</span>](https://github.com/donniedice/remove_nameplate_debuffs/issues)
+- <span style="color:#2dc26b">🐛 **Report bugs**</span> <span style="color:#e67e23">via</span> [<span style="color:#b96ad9">GitHub Issues</span>](https://github.com/donniedice/RemoveNameplateDebuffs/issues)
 - <span style="color:#ff6b6b">💡 **Suggest features**</span> <span style="color:#e67e23">in our</span> [<span style="color:#7289da">Discord</span>](https://discord.gg/hK9N3esnce)
 - <span style="color:#4ecdc4">🌍 **Help with translations**</span> <span style="color:#e67e23">for global players</span>
 - <span style="color:#2dc26b">⭐ **Star the repository**</span> <span style="color:#e67e23">to show your support</span>
@@ -283,7 +285,7 @@ _<span style="color:#e67e23">For updates on this issue, join our</span> [<span s
 
 ## <span style="color:#e74c3c">📄 License</span>
 
-<span style="color:#e67e23">This project is licensed under the</span> [<span style="color:#2dc26b">MIT License</span>](https://github.com/donniedice/remove_nameplate_debuffs/blob/main/LICENSE)<span style="color:#e67e23">.</span>
+<span style="color:#e67e23">This project is licensed under the</span> [<span style="color:#2dc26b">MIT License</span>](https://github.com/donniedice/RemoveNameplateDebuffs/blob/main/LICENSE)<span style="color:#e67e23">.</span>
 
 ---
 

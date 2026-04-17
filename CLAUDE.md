@@ -11,10 +11,10 @@ RND (Remove Nameplate Debuffs) is a professional World of Warcraft addon that re
 - **data/core.lua**: Main addon functionality with advanced features
 - **data/locales.lua**: Multi-language support (English, Russian, German, French, Spanish)
 - **images/icon.tga**: Addon icon displayed in all output
-- **Remove_Nameplate_Debuffs.toc**: TOC file for retail WoW (Interface: 110105)
-- **Remove_Nameplate_Debuffs_Cata.toc**: TOC file for Classic Cataclysm (Interface: 40402)
-- **Remove_Nameplate_Debuffs_Vanilla.toc**: TOC file for Classic WoW (Interface: 11507)
-- **Remove_Nameplate_Debuffs_Mists.toc**: TOC file for Mists of Pandaria (Interface: 50500)
+- **RemoveNameplateDebuffs.toc**: TOC file for retail WoW (Interface: 110105)
+- **RemoveNameplateDebuffs_Cata.toc**: TOC file for Classic Cataclysm (Interface: 40402)
+- **RemoveNameplateDebuffs_Vanilla.toc**: TOC file for Classic WoW (Interface: 11507)
+- **RemoveNameplateDebuffs_Mists.toc**: TOC file for Mists of Pandaria (Interface: 50500)
 
 ## Commands
 

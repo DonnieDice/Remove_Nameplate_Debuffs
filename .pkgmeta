@@ -1,4 +1,4 @@
-package-as: Remove_Nameplate_Debuffs
+package-as: RemoveNameplateDebuffs
 
 enable-nolib-creation: no
 
