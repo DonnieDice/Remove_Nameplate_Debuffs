@@ -8,7 +8,7 @@
 ## SavedVariables: RNDSettings
 
 ## X-Category: Buffs & Debuffs
-## X-Website: https://github.com/DonnieDice/RemoveNameplateDebuffs
+## X-Website: https://github.com/donniedice/RemoveNameplateDebuffs
 ## X-Curse-Project-ID: 610801
 ## X-Wago-ID: xZKxLEKk
 ## X-WoWI-ID: 26320

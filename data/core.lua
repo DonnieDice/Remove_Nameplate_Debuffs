@@ -15,6 +15,11 @@ local ADDON_NAME = "RemoveNameplateDebuffs"
 local ICON_PATH = "|Tinterface/addons/RemoveNameplateDebuffs/images/icon:16:16|t"
 local MINIMAP_ICON_TEXTURE = "Interface\\AddOns\\RemoveNameplateDebuffs\\images\\icon"
 
+-- Chat prefix matching RGX Mods standard
+local CHAT_PREFIX = ICON_PATH .. " - |cffffffff[|r|cff05dffaRND|r|cffffffff]|r"
+local CHAT_ENABLE_PREFIX = ICON_PATH .. " - |cffffffff[|r|cff05dffaRND|r|cffffffff]|r |cff00ff00ENABLED|r - "
+local CHAT_DISABLE_PREFIX = ICON_PATH .. " - |cffffffff[|r|cff05dffaRND|r|cffffffff]|r |cffff0000DISABLED|r - "
+
 -- Set addon properties
 RND.version = ADDON_VERSION
 RND.addonName = ADDON_NAME
@@ -418,14 +423,14 @@ function RND:HandleSlashCommand(args)
 
     local command = string.lower(args or "")
 
-    if command == "" or command == "help" then
-        self:ShowHelp()
-    elseif command == "on" or command == "enable" then
-        self:SetSetting("enabled", true)
-        print(iconPrefix .. " |cffff7d00RND:|r " .. self.L["ADDON_ENABLED"])
-    elseif command == "off" or command == "disable" then
-        self:SetSetting("enabled", false)
-        print(iconPrefix .. " |cffff7d00RND:|r " .. self.L["ADDON_DISABLED"])
+if command == "" or command == "help" then
+				self:ShowHelp()
+			elseif command == "on" or command == "enable" then
+				self:SetSetting("enabled", true)
+				print(CHAT_ENABLE_PREFIX .. self.L["ADDON_ENABLED"])
+			elseif command == "off" or command == "disable" then
+				self:SetSetting("enabled", false)
+				print(CHAT_DISABLE_PREFIX .. self.L["ADDON_DISABLED"])
     elseif command == "test" then
         self:TestFunctionality()
     elseif command == "status" then
