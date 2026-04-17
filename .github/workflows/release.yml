@@ -116,14 +116,14 @@ jobs:
             '{
               "content": "",
               "username": "RND Release",
-              "avatar_url": "https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/images/rnd_logo.png",
+              "avatar_url": "https://raw.githubusercontent.com/donniedice/RemoveNameplateDebuffs/main/images/rnd_logo.png",
               "embeds": [{
                 "title": "\($emoji) RND | Remove Nameplate Debuffs - \($version)\($type_text)",
                 "description": "**Clean up your nameplates!** A new version of RND has been released!\n\n🎯 **What'\''s New:**\n\($changelog)\n\n**Remove debuff icons from enemy nameplates for a cleaner UI experience!**",
                 "url": "https://github.com/donniedice/RemoveNameplateDebuffs/releases/tag/\($tag)",
                 "color": $color,
                 "thumbnail": {
-                  "url": "https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/images/rnd_logo.png"
+                  "url": "https://raw.githubusercontent.com/donniedice/RemoveNameplateDebuffs/main/images/rnd_logo.png"
                 },
                 "fields": [
                   {
@@ -180,7 +180,7 @@ jobs:
             '{
               "content": "",
               "username": "RND Build Failed",
-              "avatar_url": "https://raw.githubusercontent.com/donniedice/Remove_Nameplate_Debuffs/main/images/rnd_logo.png",
+              "avatar_url": "https://raw.githubusercontent.com/donniedice/RemoveNameplateDebuffs/main/images/rnd_logo.png",
               "embeds": [{
                 "title": "❌ RND Build Failed",
                 "description": "The release workflow encountered an error",
