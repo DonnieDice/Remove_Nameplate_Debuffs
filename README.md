@@ -75,6 +75,7 @@
 
 ---
 
+<a id="support"></a>
 ## <span style="color:#e74c3c">💖 Support </span> <span style="color:#8B1538">R</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span> <span style="color:#4ecdc4">Mods</span>
 
 <div align="center">
@@ -105,6 +106,7 @@ _<span style="color:#e67e23">Every donation helps fund new features and improvem
 
 ---
 
+<a id="features"></a>
 ## <span style="color:#e74c3c">✨ Features</span>
 
 <div align="center">
@@ -123,7 +125,7 @@ _<span style="color:#e67e23">Every donation helps fund new features and improvem
 
 </div>
 
-### <span style="color:#e74c3c">🖥️ Nameplate Addon Compatibility</span>
+## <span style="color:#e74c3c">🖥️ Nameplate Addon Compatibility</span>
 
 <div align="center">
 
@@ -139,6 +141,7 @@ _<span style="color:#e67e23">Every donation helps fund new features and improvem
 
 ---
 
+<a id="quick-start"></a>
 ## <span style="color:#e74c3c">🚀 Quick Start</span>
 
 1. **<span style="color:#2dc26b">Install</span>** <span style="color:#e74c3c">R</span><span style="color:#e74c3c">N</span><span style="color:#e74c3c">D</span> <span style="color:#e67e23">from your preferred platform</span>
@@ -149,6 +152,7 @@ _<span style="color:#e67e23">Every donation helps fund new features and improvem
 
 ---
 
+<a id="command-reference"></a>
 ## <span style="color:#e74c3c">📋 Command Reference</span>
 
 <span style="color:#e67e23">Use</span> <span style="color:#2dc26b">`/rnd`</span> <span style="color:#e67e23">followed by</span><span style="color:#3598db">:</span>
@@ -169,6 +173,7 @@ _<span style="color:#e67e23">Every donation helps fund new features and improvem
 
 ---
 
+<a id="compatibility"></a>
 ## <span style="color:#e74c3c">📋 Compatibility</span>
 
 <div align="center">
@@ -184,6 +189,7 @@ _<span style="color:#e67e23">Every donation helps fund new features and improvem
 
 ---
 
+<a id="installation"></a>
 ## <span style="color:#e74c3c">📥 Installation</span>
 
 1. **<span style="color:#2dc26b">Download</span>** <span style="color:#e67e23">from your preferred platform</span><span style="color:#3598db">:</span>
@@ -310,6 +316,6 @@ _<span style="color:#e67e23">"Clean nameplates, clear focus, clean victory."</sp
 
 [<span style="color:#05dffa">BLU</span>](https://github.com/donniedice/BLU) | [<span style="color:#05dffa">BLU Classic</span>](https://github.com/donniedice/BLU_Classic) | [<span style="color:#9b59b6">CCU</span>](https://github.com/donniedice/CoordinationCloakUtility) | [<span style="color:#ffe568">FFLU</span>](https://github.com/donniedice/FFLU) | [<span style="color:#58be81">PetBuddy2</span>](https://github.com/donniedice/PetBuddy2) | [<span style="color:#58be81">SQP</span>](https://github.com/donniedice/SimpleQuestPlates) | [<span style="color:#8B4513">SRLU</span>](https://github.com/donniedice/SRLU)
 
-**<span style="color:#8B1538">🎮</span> <span style="color:#8B1538">R</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span> <span style="color:#4ecdc4">Mods</span> <span style="color:#3598db">-</span> <span style="color:#e67e23">Powered by</span> [<span style="color:#8B1538">R</span><span style="color:#7598b6">ealm</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span>](https://realmgx.com) <span style="color:#e67e23">Community</span>**
+**<img src="https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/images/kiwi.gif" width="18" height="18"> <span style="color:#8B1538">R</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span> <span style="color:#4ecdc4">Mods</span> <span style="color:#3598db">-</span> <span style="color:#e67e23">Powered by</span> [<span style="color:#8B1538">R</span><span style="color:#7598b6">ealm</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span>](https://realmgx.com) <span style="color:#e67e23">Community</span>**
 
 </div>
