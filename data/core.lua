@@ -15,8 +15,8 @@ local ADDON_NAME = "RemoveNameplateDebuffs"
 local ICON_PATH = "|Tinterface/addons/RemoveNameplateDebuffs/images/icon:16:16|t"
 local MINIMAP_ICON_TEXTURE = "Interface\\AddOns\\RemoveNameplateDebuffs\\images\\icon"
 
--- Chat prefix matching RGX Mods standard (matches BLU format)
-local CHAT_PREFIX = ICON_PATH .. " - |cffffffff[|r|cff05dffaRND|r|cffffffff]|r"
+-- Chat prefix with orange R, N, D in [RND]
+local CHAT_PREFIX = ICON_PATH .. " - |cffffffff[|r|cffff7d00RND|r|cffffffff]|r"
 
 -- Set addon properties
 RND.version = ADDON_VERSION
