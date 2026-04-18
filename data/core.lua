@@ -12,8 +12,8 @@ RND = RND or {}
 -- Constants (cached for performance)
 local ADDON_VERSION = "3.2.0"
 local ADDON_NAME = "RemoveNameplateDebuffs"
-local ICON_PATH = "|Tinterface/addons/RemoveNameplateDebuffs/images/icon:16:16|t"
-local MINIMAP_ICON_TEXTURE = "Interface\\AddOns\\RemoveNameplateDebuffs\\images\\icon"
+local ICON_PATH = "|Tinterface/addons/RemoveNameplateDebuffs/media/icon:16:16|t"
+local MINIMAP_ICON_TEXTURE = "Interface\\AddOns\\RemoveNameplateDebuffs\\media\\icon"
 
 -- Chat prefix with orange R, N, D in [RND]
 local CHAT_PREFIX = ICON_PATH .. " - |cffffffff[|r|cffff7d00RND|r|cffffffff]|r"
