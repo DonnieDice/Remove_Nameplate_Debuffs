@@ -209,13 +209,9 @@ function RND:DisplayWelcomeMessage()
 		return
 	end
 
-	-- Styled title with orange R, N, D letters
-	local title = "[|cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r|cffff7d00!|r]"
-	local status = self:GetSetting("enabled") and self.L["ENABLED_STATUS"] or self.L["DISABLED_STATUS"]
-
-	-- Welcome messages matching RGX Mods standard
-	print(CHAT_PREFIX .. " " .. title .. " " .. status)
-	print(CHAT_PREFIX .. " |cffffff00Version:|r |cff8080ffv" .. ADDON_VERSION .. "|r")
+	-- Welcome messages matching RGX Mods standard (same format as BLU)
+	print(CHAT_PREFIX .. " Welcome. " .. self.L["TYPE_HELP"])
+	print(CHAT_PREFIX .. " |cffffff00Version:|r |cff8080ff" .. ADDON_VERSION .. "|r")
 
 	-- Show community message on first run
 	if self:GetSetting("firstRun") then
