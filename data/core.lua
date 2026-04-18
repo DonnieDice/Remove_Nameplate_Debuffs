@@ -218,8 +218,6 @@ function RND:DisplayWelcomeMessage()
 		print(CHAT_PREFIX .. " " .. self.L["COMMUNITY_MESSAGE"])
 		self:SetSetting("firstRun", false)
 	end
-
-	print(CHAT_PREFIX .. " " .. self.L["TYPE_HELP"])
 end
 
 -- =====================================================================================
