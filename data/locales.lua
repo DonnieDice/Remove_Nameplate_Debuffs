@@ -16,9 +16,9 @@ local locale = GetLocale()
 
 -- Default English strings (always loaded as fallback)
 local L = {
-    -- Status Messages
-    ["ADDON_ENABLED"] = "Addon |cff00ff00enabled|r",
-    ["ADDON_DISABLED"] = "Addon |cffff0000disabled|r",
+	-- Status Messages
+	["ADDON_ENABLED"] = "|cff00ff00Addon enabled|r",
+	["ADDON_DISABLED"] = "|cffff0000Addon disabled|r",
     ["DEBUFFS_HIDDEN"] = "Nameplate debuffs are now |cffff0000hidden|r",
     ["DEBUFFS_SHOWN"] = "Nameplate debuffs are now |cff00ff00visible|r",
     ["WELCOME_MESSAGE"] = "Welcome to RND! Type |cffffffff/rnd help|r for commands",
@@ -38,7 +38,7 @@ local L = {
     -- Status Display
     ["STATUS_HEADER"] = "|cffff7d00=== RND Status ===|r",
     ["STATUS_STATUS"] = "Status:",
-    ["STATUS_VERSION"] = "Version: |cffffffff%s|r",
+	["STATUS_VERSION"] = "|cffffff00Version:|r |cff8080ff%s|r",
     
     -- General Status
     ["ENABLED_STATUS"] = "|cff00ff00Enabled|r",
@@ -70,8 +70,8 @@ local L = {
 
 -- Russian localization by ZamestoTV (Hubbotu)
 if locale == "ruRU" then
-    L["ADDON_ENABLED"] = "Аддон |cff00ff00включен|r"
-    L["ADDON_DISABLED"] = "Аддон |cffff0000отключен|r"
+		L["ADDON_ENABLED"] = "|cff00ff00Аддон включен|r"
+		L["ADDON_DISABLED"] = "|cffff0000Аддон отключен|r"
     L["DEBUFFS_HIDDEN"] = "Дебаффы на индикаторах здоровья теперь |cffff0000скрыты|r"
     L["DEBUFFS_SHOWN"] = "Дебаффы на индикаторах здоровья теперь |cff00ff00видны|r"
     L["WELCOME_MESSAGE"] = "Добро пожаловать в RND! Введите |cffffffff/rnd help|r для команд"
@@ -107,8 +107,8 @@ if locale == "ruRU" then
 
 -- German localization
 elseif locale == "deDE" then
-    L["ADDON_ENABLED"] = "Addon |cff00ff00aktiviert|r"
-    L["ADDON_DISABLED"] = "Addon |cffff0000deaktiviert|r"
+		L["ADDON_ENABLED"] = "|cff00ff00Addon aktiviert|r"
+		L["ADDON_DISABLED"] = "|cffff0000Addon deaktiviert|r"
     L["DEBUFFS_HIDDEN"] = "Namensplaketten-Debuffs sind jetzt |cffff0000verborgen|r"
     L["DEBUFFS_SHOWN"] = "Namensplaketten-Debuffs sind jetzt |cff00ff00sichtbar|r"
     L["WELCOME_MESSAGE"] = "Willkommen bei RND! Tippe |cffffffff/rnd help|r für Befehle"

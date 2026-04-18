@@ -15,10 +15,8 @@ local ADDON_NAME = "RemoveNameplateDebuffs"
 local ICON_PATH = "|Tinterface/addons/RemoveNameplateDebuffs/images/icon:16:16|t"
 local MINIMAP_ICON_TEXTURE = "Interface\\AddOns\\RemoveNameplateDebuffs\\images\\icon"
 
--- Chat prefix matching RGX Mods standard
+-- Chat prefix matching RGX Mods standard (matches BLU format)
 local CHAT_PREFIX = ICON_PATH .. " - |cffffffff[|r|cff05dffaRND|r|cffffffff]|r"
-local CHAT_ENABLE_PREFIX = ICON_PATH .. " - |cffffffff[|r|cff05dffaRND|r|cffffffff]|r |cff00ff00ENABLED|r - "
-local CHAT_DISABLE_PREFIX = ICON_PATH .. " - |cffffffff[|r|cff05dffaRND|r|cffffffff]|r |cffff0000DISABLED|r - "
 
 -- Set addon properties
 RND.version = ADDON_VERSION
@@ -184,48 +182,48 @@ end
 
 -- Test functionality by toggling nameplates
 function RND:TestFunctionality()
-    if not self.L then
-        print(ICON_PATH .. " |cffff0000RND Error:|r Localization not loaded")
-        return
-    end
+	if not self.L then
+		print(CHAT_PREFIX .. " |cffff0000Error:|r Localization not loaded")
+		return
+	end
 
-    print(ICON_PATH .. " |cffff7d00RND:|r " .. self.L["TEST_TOGGLING"])
+	print(CHAT_PREFIX .. " " .. self.L["TEST_TOGGLING"])
 
-    -- Toggle nameplates off and on to force refresh
-    SetCVar("nameplateShowEnemies", 0)
-    C_Timer.After(0.5, function()
-        SetCVar("nameplateShowEnemies", 1)
-        print(ICON_PATH .. " |cffff7d00RND:|r " .. self.L["TEST_COMPLETE"])
-    end)
+	-- Toggle nameplates off and on to force refresh
+	SetCVar("nameplateShowEnemies", 0)
+	C_Timer.After(0.5, function()
+		SetCVar("nameplateShowEnemies", 1)
+		print(CHAT_PREFIX .. " " .. self.L["TEST_COMPLETE"])
+	end)
 end
 
 -- Display welcome message on player login
 function RND:DisplayWelcomeMessage()
-    if not self:GetSetting("showWelcome") then
-        return
-    end
+	if not self:GetSetting("showWelcome") then
+		return
+	end
 
-    -- Ensure localization exists
-    if not self.L then
-        print(ICON_PATH .. " |cffff0000RND Error:|r Localization not loaded")
-        return
-    end
+	-- Ensure localization exists
+	if not self.L then
+		print(CHAT_PREFIX .. " |cffff0000Error:|r Localization not loaded")
+		return
+	end
 
-    -- Cached strings for performance
-    local title = "[|cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r|cffff7d00!|r]"
-    local version = "|cff8080ff(v" .. ADDON_VERSION .. ")|r"
-    local rgxMods = "|cffff7d00RGX Mods|r"
-    local status = self:GetSetting("enabled") and self.L["ENABLED_STATUS"] or self.L["DISABLED_STATUS"]
+	-- Styled title with orange R, N, D letters
+	local title = "[|cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r|cffff7d00!|r]"
+	local status = self:GetSetting("enabled") and self.L["ENABLED_STATUS"] or self.L["DISABLED_STATUS"]
 
-    print(ICON_PATH .. " - " .. title .. " " .. status .. " " .. version .. " - " .. rgxMods)
+	-- Welcome messages matching RGX Mods standard
+	print(CHAT_PREFIX .. " " .. title .. " " .. status)
+	print(CHAT_PREFIX .. " |cffffff00Version:|r |cff8080ffv" .. ADDON_VERSION .. "|r")
 
-    -- Show community message on first run
-    if self:GetSetting("firstRun") then
-        print(ICON_PATH .. " " .. self.L["COMMUNITY_MESSAGE"])
-        self:SetSetting("firstRun", false)
-    end
+	-- Show community message on first run
+	if self:GetSetting("firstRun") then
+		print(CHAT_PREFIX .. " " .. self.L["COMMUNITY_MESSAGE"])
+		self:SetSetting("firstRun", false)
+	end
 
-    print(ICON_PATH .. " " .. self.L["TYPE_HELP"])
+	print(CHAT_PREFIX .. " " .. self.L["TYPE_HELP"])
 end
 
 -- =====================================================================================
@@ -361,36 +359,36 @@ function RND:CreateMinimapButton()
 end
 
 function RND:HandleMinimapClick()
-    -- Toggle enabled state on left-click
-    local current = self:GetSetting("enabled")
-    self:SetSetting("enabled", not current)
-    if self.L then
-        local msg = (not current) and self.L["ADDON_ENABLED"] or self.L["ADDON_DISABLED"]
-        print(ICON_PATH .. " |cffff7d00RND:|r " .. msg)
-    end
+-- Toggle enabled state on left-click
+	local current = self:GetSetting("enabled")
+	self:SetSetting("enabled", not current)
+	if self.L then
+		local msg = (not current) and self.L["ADDON_ENABLED"] or self.L["ADDON_DISABLED"]
+		print(CHAT_PREFIX .. " " .. msg)
+	end
 end
 
 function RND:ToggleMinimapIcon(show)
-    self:SetSetting("minimapIconEnabled", show and true or false)
-    if show then
-        if not self.minimapButton then
-            self:CreateMinimapButton()
-        end
-        if self.minimapButton then
-            self.minimapButton:Show()
-            self:UpdateMinimapButtonPosition()
-        end
-        if self.L then
-            print(ICON_PATH .. " |cffff7d00RND:|r " .. (self.L["MINIMAP_ICON_SHOWN"] or "Minimap icon |cff00ff00shown|r"))
-        end
-    else
-        if self.minimapButton then
-            self.minimapButton:Hide()
-        end
-        if self.L then
-            print(ICON_PATH .. " |cffff7d00RND:|r " .. (self.L["MINIMAP_ICON_HIDDEN"] or "Minimap icon |cffff0000hidden|r. Use |cffffffff/rnd icon on|r to show it again."))
-        end
-    end
+	self:SetSetting("minimapIconEnabled", show and true or false)
+	if show then
+		if not self.minimapButton then
+			self:CreateMinimapButton()
+		end
+		if self.minimapButton then
+			self.minimapButton:Show()
+			self:UpdateMinimapButtonPosition()
+		end
+		if self.L then
+			print(CHAT_PREFIX .. " " .. (self.L["MINIMAP_ICON_SHOWN"] or "Minimap icon |cff00ff00shown|r"))
+		end
+	else
+		if self.minimapButton then
+			self.minimapButton:Hide()
+		end
+		if self.L then
+			print(CHAT_PREFIX .. " " .. (self.L["MINIMAP_ICON_HIDDEN"] or "Minimap icon |cffff0000hidden|r. Use |cffffffff/rnd icon on|r to show it again."))
+		end
+	end
 end
 
 function RND:ApplyMinimapVisibility()
@@ -412,64 +410,60 @@ end
 
 -- Slash command handler
 function RND:HandleSlashCommand(args)
-    -- Ensure localization exists
-    if not self.L then
-        print(ICON_PATH .. " |cffff0000RND Error:|r Localization not loaded")
-        return
-    end
+	-- Ensure localization exists
+	if not self.L then
+		print(CHAT_PREFIX .. " |cffff0000Error:|r Localization not loaded")
+		return
+	end
 
-    -- Use cached icon path
-    local iconPrefix = ICON_PATH
+	local command = string.lower(args or "")
 
-    local command = string.lower(args or "")
-
-if command == "" or command == "help" then
-				self:ShowHelp()
-			elseif command == "on" or command == "enable" then
-				self:SetSetting("enabled", true)
-				print(CHAT_ENABLE_PREFIX .. self.L["ADDON_ENABLED"])
-			elseif command == "off" or command == "disable" then
-				self:SetSetting("enabled", false)
-				print(CHAT_DISABLE_PREFIX .. self.L["ADDON_DISABLED"])
-    elseif command == "test" then
-        self:TestFunctionality()
-    elseif command == "status" then
-        self:ShowStatus()
-    elseif command == "welcome on" then
-        self:SetSetting("showWelcome", true)
-        print(iconPrefix .. " |cffff7d00RND:|r " .. (self.L["WELCOME_ENABLED"] or "Welcome message |cff00ff00enabled|r"))
-    elseif command == "welcome off" then
-        self:SetSetting("showWelcome", false)
-        print(iconPrefix .. " |cffff7d00RND:|r " .. (self.L["WELCOME_DISABLED"] or "Welcome message |cffff0000disabled|r"))
-    elseif command == "icon" then
-        self:ShowHelp()
-    elseif command == "icon on" then
-        self:ToggleMinimapIcon(true)
-    elseif command == "icon off" then
-        self:ToggleMinimapIcon(false)
-    else
-        print(iconPrefix .. " " .. self.L["ERROR_PREFIX"] .. " " .. self.L["ERROR_UNKNOWN_COMMAND"])
-    end
+	if command == "" or command == "help" then
+		self:ShowHelp()
+	elseif command == "on" or command == "enable" then
+		self:SetSetting("enabled", true)
+		print(CHAT_PREFIX .. " " .. self.L["ADDON_ENABLED"])
+	elseif command == "off" or command == "disable" then
+		self:SetSetting("enabled", false)
+		print(CHAT_PREFIX .. " " .. self.L["ADDON_DISABLED"])
+	elseif command == "test" then
+		self:TestFunctionality()
+	elseif command == "status" then
+		self:ShowStatus()
+	elseif command == "welcome on" then
+		self:SetSetting("showWelcome", true)
+		print(CHAT_PREFIX .. " " .. (self.L["WELCOME_ENABLED"] or "Welcome message |cff00ff00enabled|r"))
+	elseif command == "welcome off" then
+		self:SetSetting("showWelcome", false)
+		print(CHAT_PREFIX .. " " .. (self.L["WELCOME_DISABLED"] or "Welcome message |cffff0000disabled|r"))
+	elseif command == "icon" then
+		self:ShowHelp()
+	elseif command == "icon on" then
+		self:ToggleMinimapIcon(true)
+	elseif command == "icon off" then
+		self:ToggleMinimapIcon(false)
+	else
+		print(CHAT_PREFIX .. " " .. self.L["ERROR_PREFIX"] .. " " .. self.L["ERROR_UNKNOWN_COMMAND"])
+	end
 end
 
 -- Show help information
 function RND:ShowHelp()
-    -- Ensure localization exists
-    if not self.L then
-        print(ICON_PATH .. " |cffff0000RND Error:|r Localization not loaded")
-        return
-    end
+	-- Ensure localization exists
+	if not self.L then
+		print(CHAT_PREFIX .. " |cffff0000Error:|r Localization not loaded")
+		return
+	end
 
-    local iconPrefix = ICON_PATH
-    print(iconPrefix .. " " .. self.L["HELP_HEADER"])
-    print(iconPrefix .. " " .. self.L["HELP_TEST"])
-    print(iconPrefix .. " |cffffffff/rnd on|r - Enable addon")
-    print(iconPrefix .. " |cffffffff/rnd off|r - Disable addon")
-    print(iconPrefix .. " " .. self.L["HELP_STATUS"])
-    print(iconPrefix .. " |cffffffff/rnd welcome on|r - " .. (self.L["HELP_WELCOME_ON"] or "Enable welcome message"))
-    print(iconPrefix .. " |cffffffff/rnd welcome off|r - " .. (self.L["HELP_WELCOME_OFF"] or "Disable welcome message"))
-    print(iconPrefix .. " |cffffffff/rnd icon on|r - " .. (self.L["HELP_ICON_ON"] or "Show minimap icon"))
-    print(iconPrefix .. " |cffffffff/rnd icon off|r - " .. (self.L["HELP_ICON_OFF"] or "Hide minimap icon"))
+	print(CHAT_PREFIX .. " " .. self.L["HELP_HEADER"])
+	print(CHAT_PREFIX .. " " .. self.L["HELP_TEST"])
+	print(CHAT_PREFIX .. " |cffffffff/rnd on|r - Enable addon")
+	print(CHAT_PREFIX .. " |cffffffff/rnd off|r - Disable addon")
+	print(CHAT_PREFIX .. " " .. self.L["HELP_STATUS"])
+	print(CHAT_PREFIX .. " |cffffffff/rnd welcome on|r - " .. (self.L["HELP_WELCOME_ON"] or "Enable welcome message"))
+	print(CHAT_PREFIX .. " |cffffffff/rnd welcome off|r - " .. (self.L["HELP_WELCOME_OFF"] or "Disable welcome message"))
+	print(CHAT_PREFIX .. " |cffffffff/rnd icon on|r - " .. (self.L["HELP_ICON_ON"] or "Show minimap icon"))
+	print(CHAT_PREFIX .. " |cffffffff/rnd icon off|r - " .. (self.L["HELP_ICON_OFF"] or "Hide minimap icon"))
 end
 
 -- Show current status
