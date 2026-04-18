@@ -43,7 +43,7 @@ local L = {
     -- General Status
     ["ENABLED_STATUS"] = "|cff00ff00Enabled|r",
     ["DISABLED_STATUS"] = "|cffff0000Disabled|r",
-    ["TYPE_HELP"] = "Type |cffffffff/rnd help|r for commands",
+	["TYPE_HELP"] = "Type |cffff7d00/rnd help|r for commands",
     
     -- Test Messages
     ["TEST_TOGGLING"] = "Toggling nameplates for testing...",
@@ -92,7 +92,7 @@ if locale == "ruRU" then
     
     L["ENABLED_STATUS"] = "|cff00ff00Включен|r"
     L["DISABLED_STATUS"] = "|cffff0000Отключен|r"
-    L["TYPE_HELP"] = "Введите |cffffffff/rnd help|r для команд"
+		L["TYPE_HELP"] = "Введите |cffff7d00/rnd help|r для команд"
     
     L["TEST_TOGGLING"] = "Переключение индикаторов для тестирования..."
     L["TEST_COMPLETE"] = "Тест завершен! Дебаффы должны быть скрыты на вражеских индикаторах"
@@ -129,7 +129,7 @@ elseif locale == "deDE" then
     
     L["ENABLED_STATUS"] = "|cff00ff00Aktiviert|r"
     L["DISABLED_STATUS"] = "|cffff0000Deaktiviert|r"
-    L["TYPE_HELP"] = "Tippe |cffffffff/rnd help|r für Befehle"
+		L["TYPE_HELP"] = "Tippe |cffff7d00/rnd help|r für Befehle"
     
     L["TEST_TOGGLING"] = "Schalte Namensplaketten zum Testen um..."
     L["TEST_COMPLETE"] = "Test abgeschlossen! Debuffs sollten auf feindlichen Namensplaketten verborgen sein"
@@ -166,7 +166,7 @@ elseif locale == "frFR" then
     
     L["ENABLED_STATUS"] = "|cff00ff00Activé|r"
     L["DISABLED_STATUS"] = "|cffff0000Désactivé|r"
-    L["TYPE_HELP"] = "Tapez |cffffffff/rnd help|r pour les commandes"
+		L["TYPE_HELP"] = "Tapez |cffff7d00/rnd help|r pour les commandes"
     
     L["TEST_TOGGLING"] = "Basculement des barres de nom pour le test..."
     L["TEST_COMPLETE"] = "Test terminé ! Les débuffs devraient être cachés sur les barres de nom ennemies"
@@ -203,7 +203,7 @@ elseif locale == "esES" or locale == "esMX" then
     
     L["ENABLED_STATUS"] = "|cff00ff00Habilitado|r"
     L["DISABLED_STATUS"] = "|cffff0000Deshabilitado|r"
-    L["TYPE_HELP"] = "Escribe |cffffffff/rnd help|r para comandos"
+		L["TYPE_HELP"] = "Escribe |cffff7d00/rnd help|r para comandos"
     
     L["TEST_TOGGLING"] = "Alternando placas de nombre para prueba..."
     L["TEST_COMPLETE"] = "¡Prueba completa! Los debuffs deberían estar ocultos en las placas de nombre enemigas"
