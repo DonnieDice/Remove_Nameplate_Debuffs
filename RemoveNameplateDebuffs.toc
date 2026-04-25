@@ -1,5 +1,6 @@
 ## Interface: 11508,40402,50503,110207,120000,120001,120005
-## Version: v3.2.1
+## Version: v3.3.0
+## RequiredDeps: RGX-Framework
 ## Title: |cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r|cffff7d00!|r
 ## Notes: Remove Debuff Icons from Enemy Nameplates|n|r   |cffff7d00By DonnieDice|r
 ## Author: DonnieDice

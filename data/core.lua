@@ -1,6 +1,6 @@
 --=====================================================================================
 -- RND | Remove Nameplate Debuffs! - core.lua
--- Version: 3.2.0
+-- Version: 3.3.0
 -- Author: DonnieDice
 -- Description: Professional World of Warcraft addon that removes debuff icons from nameplates
 -- RGX Mods Collection - RealmGX Community Project
@@ -10,13 +10,16 @@
 RND = RND or {}
 
 -- Constants (cached for performance)
-local ADDON_VERSION = "3.2.0"
+local ADDON_VERSION = "3.3.0"
 local ADDON_NAME = "RemoveNameplateDebuffs"
 local ICON_PATH = "|Tinterface/addons/RemoveNameplateDebuffs/media/icon:16:16|t"
 local MINIMAP_ICON_TEXTURE = "Interface\\AddOns\\RemoveNameplateDebuffs\\media\\icon"
 
 -- Chat prefix with orange R, N, D in [RND]
 local CHAT_PREFIX = ICON_PATH .. " - |cffffffff[|r|cffff7d00RND|r|cffffffff]|r"
+
+local RGX = assert(_G.RGXFramework, "RND: RGX-Framework not loaded")
+local MM  = RGX:GetMinimap()
 
 -- Set addon properties
 RND.version = ADDON_VERSION
@@ -180,6 +183,46 @@ function RND:HideNameplateDebuffs(unitId)
     end
 end
 
+-- Restore debuffs on a specific nameplate (inverse of HideNameplateDebuffs)
+function RND:RestoreNameplateDebuffs(unitId)
+    local nameplate = C_NamePlate.GetNamePlateForUnit(unitId)
+    if not nameplate or not nameplate.UnitFrame then return end
+    pcall(function()
+        if nameplate.UnitFrame:IsForbidden() then return end
+        local unitFrame = nameplate.UnitFrame
+        local frames = {
+            unitFrame.BuffFrame, unitFrame.ExtraIconFrame, unitFrame.AuraWidget,
+            unitFrame.Auras, unitFrame.Debuffs, unitFrame.Buffs, unitFrame.AuraIconRegion,
+            unitFrame.auras,
+        }
+        for _, frame in ipairs(frames) do
+            if frame then
+                frame:SetAlpha(1)
+                frame:Show()
+            end
+        end
+        for key, frame in pairs(unitFrame) do
+            if type(key) == "string" and type(frame) == "table" then
+                local lowerKey = string.lower(key)
+                if string.find(lowerKey, "debuff") or string.find(lowerKey, "buff") or string.find(lowerKey, "aura") then
+                    if frame.SetAlpha then frame:SetAlpha(1) end
+                    if frame.Show then frame:Show() end
+                end
+            end
+        end
+    end)
+end
+
+-- Restore debuffs on all currently visible nameplates
+function RND:RestoreAllNameplateDebuffs()
+    for _, nameplate in pairs(C_NamePlate.GetNamePlates()) do
+        if nameplate and nameplate.UnitFrame then
+            local unitId = nameplate.UnitFrame.unit
+            if unitId then self:RestoreNameplateDebuffs(unitId) end
+        end
+    end
+end
+
 -- Test functionality by toggling nameplates
 function RND:TestFunctionality()
 	if not self.L then
@@ -191,7 +234,7 @@ function RND:TestFunctionality()
 
 	-- Toggle nameplates off and on to force refresh
 	SetCVar("nameplateShowEnemies", 0)
-	C_Timer.After(0.5, function()
+	RGX:After(0.5, function()
 		SetCVar("nameplateShowEnemies", 1)
 		print(CHAT_PREFIX .. " " .. self.L["TEST_COMPLETE"])
 	end)
@@ -224,162 +267,66 @@ end
 -- Minimap Button
 -- =====================================================================================
 
-function RND:UpdateMinimapButtonPosition()
-    if not self.minimapButton or not Minimap then return end
-
-    local angle = math.rad((RNDSettings and RNDSettings.minimapAngle) or self.defaultMinimapAngle)
-    local minimapRadius = math.max(Minimap:GetWidth() or 140, Minimap:GetHeight() or 140) / 2 + 10
-    local x = math.cos(angle) * minimapRadius
-    local y = math.sin(angle) * minimapRadius
-    self.minimapButton:ClearAllPoints()
-    self.minimapButton:SetPoint("CENTER", Minimap, "CENTER", x, y)
-end
-
-function RND:UpdateMinimapPositionFromCursor()
-    if not self.minimapButton or not RNDSettings or not Minimap then return end
-
-    local mx, my = Minimap:GetCenter()
-    local scale = Minimap:GetEffectiveScale()
-    local cx, cy = GetCursorPosition()
-    cx = cx / scale
-    cy = cy / scale
-
-    if not mx or not my then
-        return
-    end
-
-    local dy = cy - my
-    local dx = cx - mx
-    local angle = math.deg((math.atan2 and math.atan2(dy, dx)) or math.atan(dy, dx))
-    if angle < 0 then
-        angle = angle + 360
-    end
-
-    RNDSettings.minimapAngle = angle
-    self:UpdateMinimapButtonPosition()
-end
-
 function RND:CreateMinimapButton()
-    if self.minimapButton or not Minimap then return end
-
-    local button = CreateFrame("Button", "RND_MinimapButton", Minimap)
-    self.minimapButton = button
-    button:SetSize(32, 32)
-    button:SetFrameStrata("MEDIUM")
-    button:SetFrameLevel(Minimap:GetFrameLevel() + 8)
-    button:SetMovable(true)
-    button:EnableMouse(true)
-    button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
-    button:RegisterForDrag("LeftButton")
-
-    local backdrop = button:CreateTexture(nil, "BACKGROUND")
-    backdrop:SetSize(24, 24)
-    backdrop:SetPoint("CENTER", button, "CENTER", 1, 0)
-    backdrop:SetTexture("Interface\\Buttons\\WHITE8X8")
-    if backdrop.SetMask then
-        backdrop:SetMask("Interface\\CharacterFrame\\TempPortraitAlphaMaskSmall")
-    end
-    backdrop:SetVertexColor(0.03, 0.03, 0.03, 0.98)
-    button.backdrop = backdrop
-
-    local icon = button:CreateTexture(nil, "ARTWORK")
-    icon:SetSize(19, 19)
-    icon:SetPoint("CENTER", button, "CENTER", 0, -1)
-    icon:SetTexture(MINIMAP_ICON_TEXTURE)
-    icon:SetTexCoord(0.02, 0.98, 0.02, 0.98)
-    button.icon = icon
-
-    local overlay = button:CreateTexture(nil, "OVERLAY")
-    overlay:SetSize(54, 54)
-    overlay:SetPoint("TOPLEFT", button, "TOPLEFT", 0, 0)
-    overlay:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
-    button.overlay = overlay
-
-    button:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
-
-    button:SetScript("OnClick", function(self, mouseButton)
-        if self.isDragging then return end
-        if mouseButton == "LeftButton" then
-            RND:HandleMinimapClick()
-        end
-    end)
-
-    button:SetScript("OnDragStart", function(self)
-        self.isDragging = true
-        if GameTooltip then GameTooltip:Hide() end
-        self:SetScript("OnUpdate", function()
-            RND:UpdateMinimapPositionFromCursor()
-        end)
-    end)
-    button:SetScript("OnDragStop", function(self)
-        self.isDragging = false
-        self:SetScript("OnUpdate", nil)
-        RND:UpdateMinimapButtonPosition()
-    end)
-
-    button:SetScript("OnEnter", function(self)
-        GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-        GameTooltip:ClearLines()
-        local title = "|cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r|cffff7d00!|r"
-        GameTooltip:AddLine(ICON_PATH .. " " .. title)
-        GameTooltip:AddLine(" ")
-        local enabled = RND:GetSetting("enabled")
-        local statusText = enabled and "|cff00ff00Enabled|r" or "|cffff0000Disabled|r"
-        GameTooltip:AddDoubleLine("|cffffffffStatus|r", statusText)
-        GameTooltip:AddLine(" ")
-        GameTooltip:AddDoubleLine("|cffff7d00Left-Click|r", "|cffffffffToggle debuff removal|r", 1, 1, 1, 1, 1, 1)
-        GameTooltip:AddDoubleLine("|cff4ecdc4Left-Drag|r", "|cffffffffMove around minimap|r", 1, 1, 1, 1, 1, 1)
-        GameTooltip:AddDoubleLine("|cffe74c3cCtrl+Right-Click|r", "|cffffffffHide minimap icon|r", 1, 1, 1, 1, 1, 1)
-        GameTooltip:Show()
-    end)
-    button:SetScript("OnLeave", function()
-        GameTooltip:Hide()
-    end)
-
-    -- Handle Ctrl+Right-click to hide the minimap icon
-    button:SetScript("OnMouseDown", function(self, mouseButton)
-        if mouseButton == "RightButton" and IsControlKeyDown() then
-            self.isCtrlRightClick = true
-        end
-    end)
-
-    button:SetScript("OnMouseUp", function(self, mouseButton)
-        if mouseButton == "RightButton" and self.isCtrlRightClick and IsControlKeyDown() then
-            self.isCtrlRightClick = false
-            GameTooltip:Hide()
-            RND:ToggleMinimapIcon(false)
-        end
-    end)
+    if self.minimapButton then return end
+    self.minimapButton = MM:Create({
+        name         = "RND_MinimapButton",
+        icon         = MINIMAP_ICON_TEXTURE,
+        defaultAngle = self.defaultMinimapAngle,
+        storage      = RNDSettings,
+        angleKey     = "minimapAngle",
+        enabledKey   = "minimapIconEnabled",
+        tooltip = {
+            title    = "|cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r|cffff7d00!|r",
+            getLines = function()
+                local enabled = RND:GetSetting("enabled")
+                return {
+                    { left = "|cffffffffStatus|r",           right = enabled and "|cff00ff00Enabled|r" or "|cffff0000Disabled|r" },
+                    { left = "|cffff7d00Left-Click|r",       right = "|cffffffffToggle debuff removal|r" },
+                    { left = "|cff4ecdc4Left-Drag|r",        right = "|cffffffffMove around minimap|r" },
+                    { left = "|cffe74c3cCtrl+Right-Click|r", right = "|cffffffffHide minimap icon|r" },
+                }
+            end,
+        },
+        onLeftClick = function() RND:HandleMinimapClick() end,
+        onCtrlRight = function(btn)
+            btn:SetVisible(false)
+            if RND.L then
+                print(CHAT_PREFIX .. " " .. (RND.L["MINIMAP_ICON_HIDDEN"] or "Minimap icon |cffff0000hidden|r. Use |cffffffff/rnd icon on|r to show it again."))
+            end
+        end,
+    })
 end
 
 function RND:HandleMinimapClick()
--- Toggle enabled state on left-click
 	local current = self:GetSetting("enabled")
 	self:SetSetting("enabled", not current)
+	if current then
+		self:RestoreAllNameplateDebuffs()
+	end
 	if self.L then
 		local msg = (not current) and self.L["ADDON_ENABLED"] or self.L["ADDON_DISABLED"]
 		print(CHAT_PREFIX .. " " .. msg)
 	end
+	if self.minimapButton then
+		local frame = self.minimapButton.frame
+		if GameTooltip:IsShown() and GameTooltip:GetOwner() == frame then
+			frame:GetScript("OnEnter")()
+		end
+	end
 end
 
 function RND:ToggleMinimapIcon(show)
-	self:SetSetting("minimapIconEnabled", show and true or false)
-	if show then
-		if not self.minimapButton then
-			self:CreateMinimapButton()
-		end
-		if self.minimapButton then
-			self.minimapButton:Show()
-			self:UpdateMinimapButtonPosition()
-		end
-		if self.L then
+	if not self.minimapButton and show then
+		self:CreateMinimapButton()
+	end
+	if self.minimapButton then
+		self.minimapButton:SetVisible(show and true or false)
+	end
+	if self.L then
+		if show then
 			print(CHAT_PREFIX .. " " .. (self.L["MINIMAP_ICON_SHOWN"] or "Minimap icon |cff00ff00shown|r"))
-		end
-	else
-		if self.minimapButton then
-			self.minimapButton:Hide()
-		end
-		if self.L then
+		else
 			print(CHAT_PREFIX .. " " .. (self.L["MINIMAP_ICON_HIDDEN"] or "Minimap icon |cffff0000hidden|r. Use |cffffffff/rnd icon on|r to show it again."))
 		end
 	end
@@ -387,18 +334,11 @@ end
 
 function RND:ApplyMinimapVisibility()
     local shouldShow = self:GetSetting("minimapIconEnabled")
-    if shouldShow then
-        if not self.minimapButton then
-            self:CreateMinimapButton()
-        end
-        if self.minimapButton then
-            self.minimapButton:Show()
-            self:UpdateMinimapButtonPosition()
-        end
-    else
-        if self.minimapButton then
-            self.minimapButton:Hide()
-        end
+    if shouldShow and not self.minimapButton then
+        self:CreateMinimapButton()
+    end
+    if self.minimapButton then
+        self.minimapButton:SetVisible(shouldShow and true or false)
     end
 end
 
@@ -419,6 +359,7 @@ function RND:HandleSlashCommand(args)
 		print(CHAT_PREFIX .. " " .. self.L["ADDON_ENABLED"])
 	elseif command == "off" or command == "disable" then
 		self:SetSetting("enabled", false)
+		self:RestoreAllNameplateDebuffs()
 		print(CHAT_PREFIX .. " " .. self.L["ADDON_DISABLED"])
 	elseif command == "test" then
 		self:TestFunctionality()
@@ -542,94 +483,54 @@ local function HookTooltips()
     end
 end
 
--- Event handler function (optimized with early returns)
-function RND:OnEvent(event, ...)
-    if event == "NAME_PLATE_UNIT_ADDED" then
-        -- Only process if addon is fully initialized and enabled
-        if self.initialized and self:GetSetting("enabled") then
-            local unitId = ...
-            self:HideNameplateDebuffs(unitId)
-        end
-        return
-    end
-
-    if event == "NAME_PLATE_UNIT_REMOVED" then
-        -- Could be used for cleanup if needed
-        return
-    end
-
-    if event == "UNIT_AURA" then
-        -- Handle aura updates to re-hide debuffs when they're added
-        if self.initialized and self:GetSetting("enabled") then
-            local unitId = ...
-            if unitId and string.match(unitId, "nameplate") then
-                self:HideNameplateDebuffs(unitId)
-            end
-        end
-        return
-    end
-
-    if event == "ADDON_LOADED" then
-        local addonName = ...
-        if addonName == ADDON_NAME then
-            self:InitializeSettings()
-            self:CreateMinimapButton()
-            self:ApplyMinimapVisibility()
-            self.initialized = true
-        end
-        return
-    end
-
-    if event == "PLAYER_LOGIN" then
-        -- Ensure we're initialized before showing welcome
-        if not self.initialized then
-            self:InitializeSettings()
-            self.initialized = true
-        end
-        self:ApplyMinimapVisibility()
-        self:DisplayWelcomeMessage()
-        HookTooltips()
-    end
-end
-
--- Register slash commands with error handling
-SLASH_RND1 = "/rnd"
-SlashCmdList["RND"] = function(args)
+-- Register slash command via RGX-Framework
+RGX:RegisterSlashCommand("/rnd", function(args)
     local success, errorMsg = pcall(RND.HandleSlashCommand, RND, args)
     if not success then
         print(ICON_PATH .. " |cffff0000RND Error:|r " .. tostring(errorMsg))
     end
-end
+end, "RND")
 
--- Event frame setup with error handling
-local eventFrame = CreateFrame("Frame")
-eventFrame:RegisterEvent("NAME_PLATE_UNIT_ADDED")
-eventFrame:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
-eventFrame:RegisterEvent("UNIT_AURA")
-eventFrame:RegisterEvent("ADDON_LOADED")
-eventFrame:RegisterEvent("PLAYER_LOGIN")
-eventFrame:SetScript("OnEvent", function(self, event, ...)
-    local success, errorMsg = pcall(RND.OnEvent, RND, event, ...)
-    if not success then
-        print(ICON_PATH .. " |cffff0000RND Error:|r Event handler failed: " .. tostring(errorMsg))
+-- Event registration via RGX-Framework
+RGX:RegisterEvent("NAME_PLATE_UNIT_ADDED", function(event, unitId)
+    if RND.initialized and RND:GetSetting("enabled") then
+        RND:HideNameplateDebuffs(unitId)
     end
-end)
+end, "RND_NameplateAdded")
 
--- Add a periodic update to continuously enforce debuff removal
--- This handles addons that recreate their frames dynamically
-local updateTimer = 0
-eventFrame:SetScript("OnUpdate", function(self, elapsed)
-    updateTimer = updateTimer + elapsed
-    if updateTimer > 0.5 then -- Check every 0.5 seconds
-        updateTimer = 0
-        if RND.initialized and RND:GetSetting("enabled") then
-            -- Refresh all visible nameplates
-            for _, nameplate in pairs(C_NamePlate.GetNamePlates()) do
-                if nameplate and nameplate.UnitFrame then
-                    local unitId = nameplate.UnitFrame.unit
-                    if unitId then
-                        RND:HideNameplateDebuffs(unitId)
-                    end
+RGX:RegisterEvent("UNIT_AURA", function(event, unitId)
+    if RND.initialized and RND:GetSetting("enabled") and unitId and string.match(unitId, "nameplate") then
+        RND:HideNameplateDebuffs(unitId)
+    end
+end, "RND_UnitAura")
+
+RGX:RegisterEvent("ADDON_LOADED", function(event, addonName)
+    if addonName == ADDON_NAME then
+        RND:InitializeSettings()
+        RND:CreateMinimapButton()
+        RND:ApplyMinimapVisibility()
+        RND.initialized = true
+    end
+end, "RND_AddonLoaded")
+
+RGX:RegisterEvent("PLAYER_LOGIN", function()
+    if not RND.initialized then
+        RND:InitializeSettings()
+        RND.initialized = true
+    end
+    RND:ApplyMinimapVisibility()
+    RND:DisplayWelcomeMessage()
+    HookTooltips()
+end, "RND_PlayerLogin")
+
+-- Periodic update to continuously enforce debuff removal on dynamically created frames
+RGX:Every(0.5, function()
+    if RND.initialized and RND:GetSetting("enabled") then
+        for _, nameplate in pairs(C_NamePlate.GetNamePlates()) do
+            if nameplate and nameplate.UnitFrame then
+                local unitId = nameplate.UnitFrame.unit
+                if unitId then
+                    RND:HideNameplateDebuffs(unitId)
                 end
             end
         end
