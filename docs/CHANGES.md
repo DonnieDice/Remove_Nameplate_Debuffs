@@ -1,3 +1,9 @@
+# v3.3.1 - 2026-04-29
+
+## Documentation
+- Added the v3.3.0 per-release changelog entry.
+- Synced addon version metadata for the v3.3.1 documentation release.
+
 # v3.3.0 - 2026-04-25
 
 ## Changes

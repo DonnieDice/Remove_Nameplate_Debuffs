@@ -1,6 +1,6 @@
 --=====================================================================================
 -- RND | Remove Nameplate Debuffs - locales.lua
--- Version: 3.0.0
+-- Version: 3.3.1
 -- Author: DonnieDice
 -- Description: Multi-language localization system for RND
 --=====================================================================================
