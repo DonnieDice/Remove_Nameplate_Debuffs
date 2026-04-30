@@ -190,7 +190,7 @@ jobs:
 
           case "$release_type" in
             "release")
-              title="RND | Remove Nameplate Debuffs ${version}"
+              title="RND | Remove Nameplate Debuffs! ${version}"
               color=15158332
               footer="RGX Mods • Stable Release"
               description="A new stable release is live. Level up in style!"
@@ -199,7 +199,7 @@ jobs:
               channel="Release"
               ;;
             "beta")
-              title="RND | Remove Nameplate Debuffs ${version} (Beta)"
+              title="RND | Remove Nameplate Debuffs! ${version} (Beta)"
               color=16744448
               footer="RGX Mods • Beta Build"
               description="Beta build available for testing."
@@ -208,7 +208,7 @@ jobs:
               channel="Beta"
               ;;
             "alpha"|"alpha-branch")
-              title="RND | Remove Nameplate Debuffs ${version} (Alpha)"
+              title="RND | Remove Nameplate Debuffs! ${version} (Alpha)"
               color=9109504
               footer="RGX Mods • Alpha Build"
               description="Alpha build available for testing."
@@ -217,7 +217,7 @@ jobs:
               channel="Alpha"
               ;;
             "dev")
-              title="RND | Remove Nameplate Debuffs ${version} (Dev)"
+              title="RND | Remove Nameplate Debuffs! ${version} (Dev)"
               color=3447003
               footer="RGX Mods • Dev Build"
               description="Development build from the dev branch."
@@ -226,7 +226,7 @@ jobs:
               channel="Dev"
               ;;
             *)
-              title="RND | Remove Nameplate Debuffs ${version}"
+              title="RND | Remove Nameplate Debuffs! ${version}"
               color=10000000
               footer="RGX Mods"
               description="Build completed."
