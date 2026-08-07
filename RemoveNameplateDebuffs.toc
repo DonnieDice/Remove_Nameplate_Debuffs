@@ -1,9 +1,11 @@
 ﻿## Interface: 11509,20506,50504,120007
-## Version: v3.3.2
+## Version: v3.3.3
 ## RequiredDeps: RGX-Framework
 ## Title: |cffff7d00R|r|cffffffffemove|r |cffff7d00N|r|cffffffffameplate|r |cffff7d00D|r|cffffffffebuffs|r|cffff7d00!|r
 ## Notes: Remove Debuff Icons from Enemy Nameplates|n|r   |cffff7d00By DonnieDice|r
 ## Author: DonnieDice
+## Category: RGX
+## Group: RGX
 ## Email: donniedice@protonmail.com
 ## IconTexture: Interface\AddOns\RemoveNameplateDebuffs\media\icon
 ## SavedVariables: RNDSettings
