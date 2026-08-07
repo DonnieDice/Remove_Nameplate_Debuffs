@@ -7,7 +7,7 @@
 ## Category: RGX
 ## Group: RGX
 ## Email: donniedice@protonmail.com
-## IconTexture: Interface\AddOns\RemoveNameplateDebuffs\media\icon
+## IconTexture: Interface\AddOns\RemoveNameplateDebuffs\media\icon.tga
 ## SavedVariables: RNDSettings
 
 ## X-Category: Buffs & Debuffs
