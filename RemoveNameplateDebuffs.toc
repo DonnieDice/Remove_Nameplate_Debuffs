@@ -14,7 +14,6 @@
 ## X-Website: https://github.com/RGXMods/RemoveNameplateDebuffs
 ## X-Curse-Project-ID: 610801
 ## X-Wago-ID: xZKxLEKk
-## X-WoWI-ID: 26320
 
 ## X-Embeds:
 ## X-License: MIT
